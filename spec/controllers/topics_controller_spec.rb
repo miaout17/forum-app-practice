@@ -12,7 +12,7 @@ describe TopicsController do
     assigns(:board).should eq(@board)
   end
 
-  it "#find_board" do
+  it "#find_topic" do
     @board = mock_model(Board)
     @topic = mock_model(Topic)
     @topics = []
@@ -37,7 +37,7 @@ describe TopicsController do
     controller.should_receive(:find_topic) { controller.instance_variable_set("@topic", @topic) }.ordered
   end
 
-  describe "GET new" do
+  describe "GET show" do
     it "returns the topic ant its posts" do
       should_find_board
       should_find_topic
