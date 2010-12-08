@@ -24,8 +24,6 @@ ActiveRecord::Schema.define(:version => 20101208072236) do
   create_table "categories", :force => true do |t|
     t.string   "name"
     t.integer  "parent_id"
-    t.integer  "lft"
-    t.integer  "rgt"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -45,5 +43,7 @@ ActiveRecord::Schema.define(:version => 20101208072236) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "topics", ["board_id"], :name => "index_topics_on_board_id"
 
 end

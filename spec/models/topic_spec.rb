@@ -8,6 +8,10 @@
 #  created_at :datetime
 #  updated_at :datetime
 #
+# Indexes
+#
+#  index_topics_on_board_id  (board_id)
+#
 
 require 'spec_helper'
 
