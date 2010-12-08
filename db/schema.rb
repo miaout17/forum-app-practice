@@ -19,12 +19,14 @@ ActiveRecord::Schema.define(:version => 20101208012431) do
   end
 
   create_table "posts", :force => true do |t|
+    t.integer  "topic_id"
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "topics", :force => true do |t|
+    t.integer  "board_id"
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"

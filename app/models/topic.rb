@@ -1,3 +1,5 @@
 class Topic < ActiveRecord::Base
-  validates_presence_of :title
+  belongs_to :board
+
+  validates_presence_of :title, :board_id
 end

@@ -4,7 +4,8 @@ describe Topic do
   describe "validator" do
     before :each do
       @params = {
-        :title => Faker::Lorem.sentence
+        :title => Faker::Lorem.sentence,
+        :board_id => 3,
       }
     end
 
@@ -14,6 +15,21 @@ describe Topic do
 
     it "should be invalid without name" do
       Topic.new(@params.except(:title)).should_not be_valid
+    end
+
+    it "must belong to a board" do
+      Topic.new(@params.except(:board_id)).should_not be_valid
+    end
+  end
+
+  describe "instance" do
+    before :each do
+      @topic = Factory(:topic)
+    end
+
+    it "should be able to get its board" do
+      board = @topic.board
+      board.should be
     end
   end
 end

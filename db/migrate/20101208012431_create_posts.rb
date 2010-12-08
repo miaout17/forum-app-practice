@@ -1,6 +1,7 @@
 class CreatePosts < ActiveRecord::Migration
   def self.up
     create_table :posts do |t|
+      t.references :topic
       t.text :content
 
       t.timestamps

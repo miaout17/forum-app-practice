@@ -16,4 +16,18 @@ describe Board do
       Board.new(@params.except(:name)).should_not be_valid
     end
   end
+
+  describe "instance" do
+    before :each do
+      @board = Factory(:board)
+    end
+
+    it "should be able to get its topics" do
+      topic = Factory(:topic, :board => @board)
+      @board.reload
+      @board.topics.count.should == 1
+      @board.topics.should include(topic)
+    end
+  end
+
 end
