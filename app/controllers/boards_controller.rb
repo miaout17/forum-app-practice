@@ -2,6 +2,7 @@ class BoardsController < ApplicationController
 
   def show
     @topics = @board.topics
+    @topics = @topics.paginate :per_page => 10, :page => params[:page]
   end
   
   protected

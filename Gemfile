@@ -4,7 +4,7 @@ gem 'rails', '3.0.0'
 
 # gem 'devise'
 
-# gem "will_paginate", "~> 3.0.pre2"
+gem "will_paginate", "~> 3.0.pre2"
 
 # gem "paperclip" 
 # gem "rmagick" 
