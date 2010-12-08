@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: posts
+#
+#  id         :integer(4)      not null, primary key
+#  topic_id   :integer(4)
+#  content    :text
+#  created_at :datetime
+#  updated_at :datetime
+#
+# Indexes
+#
+#  index_posts_on_topic_id  (topic_id)
+#
+
 class Post < ActiveRecord::Base
 
   # Workaround for nested form

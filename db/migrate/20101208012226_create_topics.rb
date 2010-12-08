@@ -6,6 +6,8 @@ class CreateTopics < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :topics, :board_id
   end
 
   def self.down
