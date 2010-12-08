@@ -16,7 +16,8 @@ class TopicsController < ApplicationController
   end
 
   def show
-    @posts = @topic.posts # Todo: pagination
+    @posts = @topic.posts
+    @posts = @posts.paginate :per_page => 10, :page => params[:page]
   end
 
   protected

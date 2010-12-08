@@ -44,7 +44,9 @@ describe TopicsController do
       @posts = []
       @topic.stub!(:posts).and_return(@posts)
 
-      get :show, :board_id => 4, :id => 6
+      @posts.should_receive(:paginate).with(:per_page => 10, :page => 3).and_return(@posts)
+
+      get :show, :board_id => 4, :id => 6, :page => 3
 
       assigns(:posts).should eq(@posts)
       response.should render_template("show")
