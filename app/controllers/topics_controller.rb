@@ -15,12 +15,21 @@ class TopicsController < ApplicationController
     end
   end
 
+  def show
+    @posts = @topic.posts # Todo: pagination
+  end
+
   protected
 
   before_filter :find_board
+  before_filter :find_topic, :only => [:show]
 
   def find_board
     @board = Board.find(params[:board_id])
+  end
+
+  def find_topic
+    @topic = @board.topics.find(params[:id])
   end
 
 end

@@ -12,11 +12,44 @@ describe TopicsController do
     assigns(:board).should eq(@board)
   end
 
+  it "#find_board" do
+    @board = mock_model(Board)
+    @topic = mock_model(Topic)
+    @topics = []
+
+    controller.params = {:topic_id => 4, :id => 3}
+    controller.instance_variable_set("@board", @board)
+
+    @board.should_receive(:topics).and_return(@topics)
+    @topics.should_receive(:find).with(3).and_return(@topic)
+
+    controller.send(:find_topic)
+    assigns(:topic).should eq(@topic)
+  end
+
   def should_find_board
     @board = mock_model(Board)
     controller.should_receive(:find_board) { controller.instance_variable_set("@board", @board) }.ordered
   end
 
+  def should_find_topic
+    @topic = mock_model(Topic)
+    controller.should_receive(:find_topic) { controller.instance_variable_set("@topic", @topic) }.ordered
+  end
+
+  describe "GET new" do
+    it "returns the topic ant its posts" do
+      should_find_board
+      should_find_topic
+      @posts = []
+      @topic.stub!(:posts).and_return(@posts)
+
+      get :show, :board_id => 4, :id => 6
+
+      assigns(:posts).should eq(@posts)
+      response.should render_template("show")
+    end
+  end
 
   describe "GET new" do
     it "returns a new topic form" do
