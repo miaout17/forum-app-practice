@@ -1,0 +1,14 @@
+<tr>
+  <td>
+    <%= link_to(topic.title, board_topic_path(@board, topic)) %>
+  </td>
+  <td>
+    <%= topic.posts.count - 1 %>
+  </td>
+  <td>
+    <%= topic.created_at %>
+  </td>
+  <td>
+    TBD
+  </td>
+</tr>

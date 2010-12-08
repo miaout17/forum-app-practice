@@ -1,0 +1,31 @@
+require 'spec_helper'
+
+describe BoardsController do
+  it "#find_board" do
+    @board = mock_model(Board)
+    controller.params = {:id => 4}
+
+    Board.should_receive(:find).with(4).and_return(@board)
+    controller.send(:find_board)
+
+    assigns(:board).should eq(@board)
+  end
+
+  def should_find_board
+    @board = mock_model(Board)
+    controller.should_receive(:find_board) { controller.instance_variable_set("@board", @board) }.ordered
+  end
+
+  describe "GET show" do
+    it "returns the board ant its topics" do
+      should_find_board
+      @topics = []
+      @board.stub!(:topics).and_return(@topics)
+
+      get :show, :id => 6
+
+      assigns(:topics).should eq(@topics)
+      response.should render_template("show")
+    end
+  end
+end

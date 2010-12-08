@@ -1,0 +1,11 @@
+<h2><%= @board.name %></h2>
+<%= link_to "Create New Topic", new_board_topic_path(@board) %>
+<table class="topics-list">
+  <tr>
+    <th>Title</th>
+    <th>Replies</th>
+    <th>Author</th>
+    <th>Last Replied</th>
+  </tr>
+  <%= render :partial => "topic", :collection => @topics %>
+</table>

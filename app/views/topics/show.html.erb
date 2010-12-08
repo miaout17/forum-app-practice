@@ -1,2 +1,4 @@
+Forum &gt;&gt; <%= link_to(@board.name, board_path(@board)) %>
+
 <h2><%= @topic.title %></h2>
 <%= render :partial => "post", :collection => @posts %>
