@@ -2,5 +2,5 @@
 
 Factory.define :post do |f|
   f.sequence(:content) { Faker::Lorem.sentence }
-  f.association :topic
+  f.association(:topic)
 end

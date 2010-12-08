@@ -2,4 +2,5 @@
 
 Factory.define :board do |f|
   f.sequence(:name) { Faker::Lorem.sentence }
+  f.association(:category)
 end

@@ -15,6 +15,7 @@
 
 class Board < ActiveRecord::Base
   has_many :topics
+  belongs_to :category
 
-  validates_presence_of :name
+  validates_presence_of :name, :category_id
 end

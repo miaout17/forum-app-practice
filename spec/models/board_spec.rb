@@ -19,7 +19,8 @@ describe Board do
   describe "validator" do
     before :each do
       @params = {
-        :name => Faker::Lorem.sentence
+        :name => Faker::Lorem.sentence,
+        :category_id => 6,
       }
     end
 
@@ -30,11 +31,19 @@ describe Board do
     it "should be invalid without name" do
       Board.new(@params.except(:name)).should_not be_valid
     end
+
+    it "must belong to a category" do
+      Board.new(@params.except(:category_id)).should_not be_valid
+    end
   end
 
   describe "instance" do
-    before :each do
+    before(:each) do
       @board = Factory(:board)
+    end
+
+    it "should be able to get its category" do
+      @board.category.should be
     end
 
     it "should be able to get its topics" do
