@@ -16,6 +16,8 @@ class Category < ActiveRecord::Base
   validates_presence_of :name
 
   def descendant_topics
+    # Todo: This is a very slow implementation now..
+    # maybe the category hierarchy should be cached
     board_ids = descendant_boards.collect { |board| board.id }
     return Topic.where(:board_id => board_ids)
   end
@@ -24,18 +26,17 @@ class Category < ActiveRecord::Base
   
   # returns all descendant categories including self
   def descendant_categories
-    categories = [self]
-    children.each do |child|
-      categories += child.descendant_categories
-    end
+    categories = children.collect do |child|
+      child.descendant_categories
+    end.flatten
+    categories << self
     return categories
   end
 
   def descendant_boards
-    boards = []
-    descendant_categories.each do |category|
-      boards += category.boards
-    end
+    boards = descendant_categories.collect do |category|
+      category.boards
+    end.flatten
     return boards
   end
 
