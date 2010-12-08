@@ -4,3 +4,4 @@ log/*.log
 tmp/**/*
 config/database.yml
 tmp/restart.txt
+coverage/
