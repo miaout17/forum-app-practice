@@ -31,5 +31,11 @@ describe Topic do
       board = @topic.board
       board.should be
     end
+
+    it "should be able to get its posts" do
+      post = Factory(:post, :topic => @topic)
+      @topic.reload
+      @topic.posts.should include(post)
+    end
   end
 end

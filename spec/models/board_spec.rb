@@ -25,7 +25,6 @@ describe Board do
     it "should be able to get its topics" do
       topic = Factory(:topic, :board => @board)
       @board.reload
-      @board.topics.count.should == 1
       @board.topics.should include(topic)
     end
   end
