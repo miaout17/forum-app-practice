@@ -23,8 +23,9 @@ describe CategoriesController do
 
       @topics = [ mock_model(Topic) ]
       @category.should_receive(:descendant_topics).and_return(@topics)
+      @topics.should_receive(:paginate).with(:per_page => 10, :page => 7).and_return(@topics)
 
-      get :show, :id => 6
+      get :show, :id => 6, :page => 7
 
       assigns(:topics).should eq(@topics)
       response.should render_template("show")

@@ -1,5 +1,6 @@
 <h2><%= @category.name %></h2>
 
+<%= will_paginate @topics %>
 <table class="topics-list">
   <tr>
     <th>Title</th>
@@ -9,4 +10,5 @@
   </tr>
   <%= render :partial => "boards/topic", :collection => @topics %>
 </table>
+<%= will_paginate @topics %>
 
