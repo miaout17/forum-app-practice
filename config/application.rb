@@ -38,5 +38,10 @@ module ForumApp
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+
+    config.generators do |g| 
+      g.fixture_replacement :factory_girl, :dir => "spec/factories" 
+    end
+
   end
 end
