@@ -2,23 +2,28 @@ namespace :dev do
   task :build => ['db:drop', 'db:create', 'db:migrate'] do
   end
 
-  BOARD_NUM = 2
-  TOPIC_NUM = 21
-  POST_NUM = 23
+  CATEGORY_NUM = 2
+  BOARDS_PER_CATEGORY = 2
+  TOPICS_PER_BOARD = 21
+  POSTS_PER_TOPIC = 12
 
   task :fake => ['environment', 'dev:build'] do
     ActiveRecord::Base.transaction do
 
-      BOARD_NUM.times { Factory(:board) }
+      CATEGORY_NUM.times { Factory(:category) }
+
+      Category.all.each do |category|
+        BOARDS_PER_CATEGORY.times { Factory(:board, :category => category) }
+      end
 
       Board.all.each do |board|
-        TOPIC_NUM.times do
+        TOPICS_PER_BOARD.times do
           Factory(:topic, :board => board)
         end
       end
 
       Topic.all.each do |topic|
-        POST_NUM.times do
+        POSTS_PER_TOPIC.times do
           Factory(:post, :topic => topic)
         end
       end
