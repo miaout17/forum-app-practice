@@ -1,4 +1,6 @@
 ForumApp::Application.routes.draw do
+  
+  resources :categories, :only => [:index, :show]
 
   resources :boards, :only => [:index, :show] do
     resources :topics, :except => [:edit, :update, :destroy] do

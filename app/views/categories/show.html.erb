@@ -1,0 +1,12 @@
+<h2><%= @category.name %></h2>
+
+<table class="topics-list">
+  <tr>
+    <th>Title</th>
+    <th>Replies</th>
+    <th>Author</th>
+    <th>Last Replied</th>
+  </tr>
+  <%= render :partial => "boards/topic", :collection => @topics %>
+</table>
+

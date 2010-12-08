@@ -1,6 +1,6 @@
 <tr>
   <td>
-    <%= link_to(topic.title, board_topic_path(@board, topic)) %>
+    <%= link_to(topic.title, board_topic_path(topic.board, topic)) %>
   </td>
   <td>
     <%= topic.posts.count - 1 %>

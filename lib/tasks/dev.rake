@@ -3,7 +3,7 @@ namespace :dev do
   end
 
   BOARD_NUM = 2
-  TOPIC_NUM = 11
+  TOPIC_NUM = 21
   POST_NUM = 23
 
   task :fake => ['environment', 'dev:build'] do
