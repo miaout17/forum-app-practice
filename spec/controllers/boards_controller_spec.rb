@@ -17,7 +17,7 @@ describe BoardsController do
   end
 
   describe "GET show" do
-    it "returns the board ant its topics" do
+    it "returns the board and its topics" do
       should_find_board
       @topics = []
       @board.stub!(:topics).and_return(@topics)
