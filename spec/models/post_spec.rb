@@ -3,9 +3,10 @@ require 'spec_helper'
 describe Post do
   describe "validator" do
     before :each do
+      @topic = Factory(:topic)
       @params = {
+        :topic => @topic,
         :content => Faker::Lorem.sentence,
-        :topic_id => 3,
       }
     end
 
@@ -17,8 +18,8 @@ describe Post do
       Post.new(@params.except(:content)).should_not be_valid
     end
 
-    it "must belong to a board" do
-      Post.new(@params.except(:topic_id)).should_not be_valid
+    it "must belong to a topic" do
+      Post.new(@params.except(:topic)).should_not be_valid
     end
   end
 

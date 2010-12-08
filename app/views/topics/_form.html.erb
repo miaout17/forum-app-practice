@@ -1,0 +1,19 @@
+<% if @topic.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@post.errors.count, "error") %>:</h2>
+    <ul>
+    <% @topic.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+Title: <br/>
+<%= form.text_field(:title) %>
+<br/>
+Content: <br/>
+<%= text_area(:post, :content) %>
+<br/>
+
+<%= form.submit %>

@@ -1,4 +1,11 @@
 ForumApp::Application.routes.draw do
+
+  resources :boards do
+    resources :topics do
+      resources :posts
+    end
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
