@@ -1,4 +1,10 @@
-Forum &gt;&gt; <%= link_to(@board.name, board_path(@board)) %>
+<div>
+  Forum &gt;&gt; <%= link_to(@board.name, board_path(@board)) %>
+</div>
+
+<div>
+  <%= link_to("Reply To This Topic", new_board_topic_post_path(@board, @topic)) %>
+</div>
 
 <h2><%= @topic.title %></h2>
 <%= render :partial => "post", :collection => @posts %>

@@ -1,0 +1,14 @@
+
+<h2>New Reply</h2>
+
+<div>
+Board: <%= @board.name %>
+</div>
+<div>
+Title: <%= @topic.title %>
+</div>
+
+<%= form_for([@board, @topic, @post]) do |form| %>
+  <%= render :partial => "form", :object => form %>
+<% end %>
+

@@ -17,7 +17,7 @@ describe TopicsController do
     @topic = mock_model(Topic)
     @topics = []
 
-    controller.params = {:topic_id => 4, :id => 3}
+    controller.params = {:board_id => 4, :id => 3}
     controller.instance_variable_set("@board", @board)
 
     @board.should_receive(:topics).and_return(@topics)
