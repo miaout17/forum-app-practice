@@ -1,16 +1,17 @@
 <%= category_tree %>
 
-<h2><%= @category.name %></h2>
+<h2>Category: <%= @category.name %></h2>
 
 <%= will_paginate @topics %>
 <table class="topics-list">
   <tr>
     <th>Title</th>
+    <th>Board</th>
     <th>Replies</th>
     <th>Author</th>
     <th>Last Replied</th>
   </tr>
-  <%= render :partial => "boards/topic", :collection => @topics %>
+  <%= render :partial => "topic", :collection => @topics %>
 </table>
 <%= will_paginate @topics %>
 

@@ -1,4 +1,6 @@
-<h2><%= @board.name %></h2>
+<%= category_tree %>
+
+<h2>Board: <%= @board.name %></h2>
 
 <%= will_paginate @topics %>
 <%= link_to "Create New Topic", new_board_topic_path(@board) %>
