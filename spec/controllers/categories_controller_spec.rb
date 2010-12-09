@@ -1,24 +1,28 @@
 require 'spec_helper'
 
 describe CategoriesController do
+
+  include ApplicationSpecHelperMethods
   
   it "#find_category" do
     @category = mock_model(Category)
-    controller.params = {:id => 3}
+    @all_categories = { @category.id => @category }
+    controller.instance_variable_set("@all_categories", @all_categories)
 
-    Category.should_receive(:find).with(3).and_return(@category)
+    controller.params = {:id => @category.id}
     controller.send(:find_category)
 
     assigns(:category).should eq(@category)
   end
 
   def should_find_category
-    @category = mock_model(Category)
+    @category = @root_categories.first
     controller.should_receive(:find_category) { controller.instance_variable_set("@category", @category) }.ordered
   end
 
   describe "GET show" do
     it "returns the category and descendant topics" do
+      should_load_categories
       should_find_category
 
       @topics = [ mock_model(Topic) ]

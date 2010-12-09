@@ -26,3 +26,16 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 end
+
+module ApplicationSpecHelperMethods
+  def should_load_categories
+    category = mock_model(Category)
+    @all_categories = { category.id => category }
+    @root_categories = [ category ]
+    controller.should_receive(:load_categories) do
+      controller.instance_variable_set("@all_categories", @all_categories)
+      controller.instance_variable_set("@root_categories", @root_categories)
+    end.ordered
+  end
+end
+

@@ -6,11 +6,13 @@ class CategoriesController < ApplicationController
   end
 
   protected
-
+  
+  before_filter :load_categories
   before_filter :find_category, :only => [:show]
 
   def find_category
-    @category = Category.find(params[:id])
+    # TODO: children still queried from DB, need to optimize
+    @category = @all_categories[params[:id].to_i]
   end
 
 end
