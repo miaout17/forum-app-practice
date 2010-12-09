@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>ForumApp</title>
-  <%= stylesheet_link_tag ["reset", "text", "960"] %>
+  <%= stylesheet_link_tag ["reset", "text", "960", "forum"] %>
   <%= javascript_include_tag ["jquery", "rails", "forum"] %>
   <%= csrf_meta_tag %>
 </head>
@@ -18,7 +18,7 @@
   <div id="sidebar" class="grid_3">
     <div class="box">
       <h2>Sidebar</h2>
-      <%= content_for(:sidebar) %>
+      <%= category_tree %>
     </div>
   </div>
 </div>

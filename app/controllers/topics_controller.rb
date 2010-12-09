@@ -27,6 +27,7 @@ class TopicsController < ApplicationController
 
   protected
 
+  before_filter :load_categories
   before_filter :find_board
   before_filter :find_topic, :only => [:show]
 
