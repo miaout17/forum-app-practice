@@ -1,4 +1,6 @@
-<%= category_tree %>
+<% content_for(:sidebar) do %>
+  <%= category_tree %>
+<% end %>
 
 <h2>Category: <%= @category.name %></h2>
 

@@ -2,13 +2,26 @@
 <html>
 <head>
   <title>ForumApp</title>
-  <%= stylesheet_link_tag :all %>
+  <%= stylesheet_link_tag ["reset", "text", "960"] %>
   <%= javascript_include_tag ["jquery", "rails", "forum"] %>
   <%= csrf_meta_tag %>
 </head>
 <body>
 
-<%= yield %>
+<div class="container_12">
+  <div id="content" class="grid_9">
+    <div class="box">
+      <%= yield %>
+      &nbsp;
+    </div>
+  </div>
+  <div id="sidebar" class="grid_3">
+    <div class="box">
+      <h2>Sidebar</h2>
+      <%= content_for(:sidebar) %>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
