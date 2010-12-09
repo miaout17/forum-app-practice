@@ -19,4 +19,6 @@ class AttachmentsController < ApplicationController
     @attachment = Attachment.find(params[:id])
   end
 
+  before_filter :load_categories
+
 end
