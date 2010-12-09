@@ -4,4 +4,6 @@
 
 <h2>Preview: <%= @topic.title %></h2>
 
-<%= render :partial => "post", :collection => @posts %>
+<div class="content">
+  <%= simple_format(@post.content) %>
+</div>
