@@ -38,8 +38,9 @@ namespace :dev do
         BOARDS_PER_CATEGORY.times { Factory(:board, :category => category) }
       end
 
-      Board.all.each do |board|
-        TOPICS_PER_BOARD.times do
+      all_boards = Board.all
+      TOPICS_PER_BOARD.times do
+        all_boards.each do |board|
           Factory(:topic, :board => board)
         end
       end
