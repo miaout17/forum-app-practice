@@ -1,22 +1,21 @@
 class AttachmentsController < ApplicationController
 
   def new
-    @attachment = Attachment.new
   end
 
   def create
-    @attachment = Attachment.new(params[:attachment])
+    attachments_param = params[:attachments]
+    # TODO: error message of multiple images upload
 
-    # TODO: Attachment Security?
-    if @attachment.save
-      redirect_to attachment_path(@attachment) 
-    else
-      render :new
+    @attachments = []
+    attachments_param.each do |key, param|
+      attachment = Attachment.new(param)
+      unless attachment.save
+        render :new
+        return
+      end
+      @attachments << attachment
     end
-  end
-
-  def show
-    @attachment = Attachment.find(params[:id])
   end
 
   before_filter :load_categories

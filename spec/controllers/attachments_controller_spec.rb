@@ -3,38 +3,36 @@ require 'spec_helper'
 describe AttachmentsController do
   describe "GET new" do
     it "returns a new attachment form" do
-      @attachment = mock_model(Attachment)
-      Attachment.should_receive(:new).and_return(@attachment)
-
+      
+      # The controller does nothing, let the view render the file field
       get :new
-
-      assigns(:attachment).should eq(@attachment)
       response.should render_template("new")
     end
   end
 
   describe "POST create" do
     before(:each) do
-      @params = {}
+     
+      # Simulate valid/invalid file info by true/false
+      @valid_param = { "1" => true, "2" => true }
+      @invalid_param = { "1" => true, "2" => false }
 
-      @attachment = mock_model(Attachment)
-      Attachment.should_receive(:new).with(@params).and_return(@attachment)
+      Attachment.stub!(:new) do |valid|
+        attachment = mock_model(Attachment)
+        attachment.stub!(:save).and_return(valid)
+        attachment
+      end
     end
 
-    it "cretes a new topic successfully" do
-      @attachment.should_receive(:save).and_return(true)
-      post :create, {:attachment => @params}
-
-      response.should redirect_to(attachment_path(@attachment))
+    it "cretes attachments successfully" do
+      post :create, {:attachments => @valid_param}
+      response.should render_template("create")
     end
 
     it "failed to create a new topic" do
-      @attachment.should_receive(:save).and_return(false)
-      post :create, {:attachment => @params}
-
+      post :create, {:attachments => @invalid_param}
       response.should render_template("new")
     end
-
   end
 
 end

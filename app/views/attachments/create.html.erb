@@ -1,0 +1,11 @@
+<h2>Attachment</h2>
+
+<% @attachments.each do |attachment| %>
+  <p>You have successfully uploaded the image.</p>
+  <p>Paste the following HTML code into your post: </p>
+  <div>
+  <%= "<img src='#{attachment.data.url}'/>" %>
+  </div>
+  <h3>Image Preview</h3>
+  <%= image_tag(attachment.data.url) %>
+<% end %>

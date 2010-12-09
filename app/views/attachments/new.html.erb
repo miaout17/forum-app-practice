@@ -1,18 +1,9 @@
 <h2>New Attachment</h2>
 
-<% if @attachment.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@attachment.errors.count, "error") %>:</h2>
-    <ul>
-    <% @attachment.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
+<%= form_tag(attachments_url, {:multipart => true, :method => :post}) do %>
+  <% 1.upto(10) do |index| %>
+    <%= file_field("attachments[#{index}]", "data") %> <br/>
+  <% end %>
+  <%= submit_tag("Upload") %>
 <% end %>
 
-<%= form_for(@attachment, :html => {:multipart => true}) do |form| %>
-  Upload Image: <br/>
-  <%= form.file_field(:data) %>
-  <%= form.submit %>
-<% end %>
