@@ -5,3 +5,4 @@ tmp/**/*
 config/database.yml
 tmp/restart.txt
 coverage/
+public/system/
