@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101208072236) do
+ActiveRecord::Schema.define(:version => 20101209010201) do
 
   create_table "boards", :force => true do |t|
     t.string   "name"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(:version => 20101208072236) do
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "posts_count", :default => 0
   end
 
   add_index "topics", ["board_id"], :name => "index_topics_on_board_id"

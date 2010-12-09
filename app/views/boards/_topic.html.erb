@@ -3,7 +3,7 @@
     <%= link_to(topic.title, board_topic_path(topic.board, topic)) %>
   </td>
   <td>
-    <%= topic.posts.count - 1 %>
+    <%= topic.posts_count - 1 %>
   </td>
   <td>
     <%= topic.created_at %>

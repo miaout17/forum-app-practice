@@ -52,5 +52,12 @@ describe Topic do
       @topic.reload
       @topic.posts.should include(post)
     end
+
+    it "should cache its posts count" do
+      @topic.posts_count.should == 0
+      Factory(:post, :topic => @topic)
+      @topic.reload
+      @topic.posts_count.should == 1
+    end
   end
 end

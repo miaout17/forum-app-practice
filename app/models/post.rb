@@ -18,7 +18,7 @@ class Post < ActiveRecord::Base
   # Workaround for nested form
   # Reference: 
   # https://rails.lighthouseapp.com/projects/8994/tickets/2815-nested-models-build-should-directly-assign-the-parent
-  belongs_to :topic, :inverse_of => :posts
+  belongs_to :topic, :inverse_of => :posts, :counter_cache => true
 
   validates_presence_of :content
   validates_presence_of :topic
