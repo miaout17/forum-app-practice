@@ -4,7 +4,7 @@ namespace :dev do
 
   CATEGORY_NUM = 2
   BOARDS_PER_CATEGORY = 2
-  TOPICS_PER_BOARD = 21
+  TOPICS_PER_BOARD = 10
   POSTS_PER_TOPIC = 12
 
   def create_hierarchical_categories(parent, num, level)
