@@ -7,7 +7,7 @@ class AttachmentsController < ApplicationController
   def create
     @attachment = Attachment.new(params[:attachment])
 
-    # Todo: Attachment Security?
+    # TODO: Attachment Security?
     if @attachment.save
       redirect_to attachment_path(@attachment) 
     else

@@ -16,7 +16,7 @@ class Category < ActiveRecord::Base
   validates_presence_of :name
 
   def descendant_topics
-    # Todo: This is a very slow implementation now..
+    # TODO: This is a very slow implementation now..
     # maybe the category hierarchy should be cached
     board_ids = descendant_boards.collect { |board| board.id }
     return Topic.where(:board_id => board_ids)

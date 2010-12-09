@@ -42,7 +42,7 @@ describe Category do
     it "can get its descendant topics" do
       @root = @category
       
-      # Todo: Refator with factory_girl?
+      # TODO: Refator with factory_girl?
       # need to deal with "move_to_child_of" method
 
       @game = Factory(:category, :parent => @root)
