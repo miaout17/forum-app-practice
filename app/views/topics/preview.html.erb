@@ -1,0 +1,7 @@
+<div>
+  Forum &gt;&gt; <%= link_to(@board.name, board_path(@board)) %>
+</div>
+
+<h2>Preview: <%= @topic.title %></h2>
+
+<%= render :partial => "post", :collection => @posts %>

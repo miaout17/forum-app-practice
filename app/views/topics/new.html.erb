@@ -3,6 +3,10 @@
 
 <%= link_to("New Attachment", new_attachment_path, :target => "_blank") %>
 
+<div>
+Board: <%= @board.name %>
+</div>
+
 <%= form_for([@board, @topic]) do |form| %>
   <%= render :partial => "form", :object => form %>
 <% end %>

@@ -20,6 +20,11 @@ class TopicsController < ApplicationController
     @posts = @posts.paginate :per_page => 10, :page => params[:page]
   end
 
+  def preview
+    @topic = @board.topics.build(params[:topic])
+    @post = @topic.posts.build(params[:post])
+  end
+
   protected
 
   before_filter :find_board

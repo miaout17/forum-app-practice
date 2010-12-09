@@ -5,6 +5,7 @@ ForumApp::Application.routes.draw do
   resources :boards, :only => [:index, :show] do
     resources :topics, :except => [:edit, :update, :destroy] do
       resources :posts, :only => [:new, :create, :destroy]
+      put :preview, :on => :collection
     end
   end
 

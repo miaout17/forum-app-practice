@@ -102,6 +102,34 @@ describe TopicsController do
       assigns(:post ).should eq(@post)
       response.should render_template("new")
     end
+  end
+
+  describe "PUT preview" do
+    it "renders the topics preview do" do
+      should_find_board
+      
+      @topics = []
+      @topic = mock_model(Topic)
+      @posts = []
+      @post  = mock_model(Post)
+
+      @topic_params = { :title => "TITLE" }
+      @post_params = { :content => "CONTENT" }
+
+      @board.stub!(:topics).and_return(@topics)
+      @topics.should_receive(:build).and_return(@topic)
+
+      @topic.stub!(:posts).and_return(@posts)
+      @posts.should_receive(:build).and_return(@post)
+
+      put :preview, {:board_id => 4, :topic => @topic_params, :post => @post_params}
+
+      assigns(:topic).should eq(@topic)
+      assigns(:post).should eq(@post)
+
+      response.should render_template("preview")
+    end
 
   end
 end
+
