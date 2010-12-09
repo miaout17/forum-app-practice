@@ -49,6 +49,9 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.16)
     mysql2 (0.2.6)
+    paperclip (2.3.6)
+      activerecord
+      activesupport
     polyglot (0.3.1)
     rack (1.2.1)
     rack-mount (0.6.13)
@@ -71,6 +74,7 @@ GEM
       thor (~> 0.14.0)
     rake (0.8.7)
     rcov (0.9.9)
+    rmagick (2.13.1)
     rspec (2.0.1)
       rspec-core (~> 2.0.1)
       rspec-expectations (~> 2.0.1)
@@ -99,9 +103,11 @@ DEPENDENCIES
   factory_girl_rails
   faker
   mysql2
+  paperclip
   rails (= 3.0.0)
   rails3-generators
   rcov
+  rmagick
   rspec-rails (~> 2.0.0)
   sqlite3-ruby
   will_paginate (~> 3.0.pre2)

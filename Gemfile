@@ -6,8 +6,8 @@ gem 'rails', '3.0.0'
 
 gem "will_paginate", "~> 3.0.pre2"
 
-# gem "paperclip" 
-# gem "rmagick" 
+gem "paperclip" 
+gem "rmagick" 
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'mysql2'
