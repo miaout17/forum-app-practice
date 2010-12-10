@@ -43,5 +43,8 @@ module ForumApp
       g.fixture_replacement :factory_girl, :dir => "spec/factories" 
     end
 
+    config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
   end
 end
+
