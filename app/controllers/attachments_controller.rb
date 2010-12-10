@@ -1,21 +1,23 @@
 class AttachmentsController < ApplicationController
 
   def new
+    # The controller do nothing, let the view render the file field
   end
 
   def create
     attachments_param = params[:attachments]
     # TODO: error message of multiple images upload
 
-    @attachments = []
-    attachments_param.each do |key, param|
-      attachment = Attachment.new(param)
-      unless attachment.save
-        render :new
-        return
-      end
-      @attachments << attachment
+    @attachments = attachments_param.collect do |key, param|
+      Attachment.new(param)
     end
+
+    if @attachments.all? { |attachment| attachment.save }
+      render :create
+    else
+      render :new
+    end
+    
   end
 
   before_filter :load_categories

@@ -4,7 +4,7 @@ describe AttachmentsController do
   describe "GET new" do
     it "returns a new attachment form" do
       
-      # The controller does nothing, let the view render the file field
+      # The controller do nothing, let the view render the file field
       get :new
       response.should render_template("new")
     end
