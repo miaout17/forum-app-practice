@@ -68,8 +68,14 @@ describe PostsController do
 
     it "creates successfully" do
       @post.should_receive(:save).and_return(true)
+      @post.should_receive(:attach_by_ids).with([3, 5])
 
-      post :create, {:board_id => 4, :topic_id => 6, :post => @params}
+      post :create, {
+        :board_id => 4, 
+        :topic_id => 6,
+        :post => @params, 
+        :attachment_ids => "3,5"
+      }
 
       response.should redirect_to(board_topic_path(@board, @topic))
     end

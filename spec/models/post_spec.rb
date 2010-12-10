@@ -47,5 +47,15 @@ describe Post do
       topic = @post.topic
       topic.should be
     end
+
+    it "could be attached by attachment_ids" do
+      attachments = []
+      2.times { attachments << Factory(:attachment) }
+      attachment_ids = attachments.map { |a| a.id }
+      @post.attach_by_ids(attachment_ids)
+      @post.reload
+      @post.attachments.count.should == 2
+      @post.attachments.should =~ attachments
+    end
   end
 end

@@ -7,7 +7,7 @@ class Attachment < ActiveRecord::Base
   def attach(the_post)
     return false unless post_id.nil?
     self.post_id = the_post.id
-    save!
-    return true
+    return self.save
   end
+
 end

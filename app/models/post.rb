@@ -23,4 +23,12 @@ class Post < ActiveRecord::Base
 
   validates_presence_of :content
   validates_presence_of :topic
+
+  def attach_by_ids(attachment_ids)
+    attachments = Attachment.where(:id => attachment_ids)
+    attachments.each do |attachment|
+      attachment.attach(self)
+    end
+  end
+
 end
