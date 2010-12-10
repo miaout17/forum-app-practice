@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe PostsController do
+  
+  include ApplicationSpecHelperMethods
+
   it "#find_board" do
     @board = mock_model(Board)
     controller.params = {:board_id => 4}
@@ -38,6 +41,7 @@ describe PostsController do
 
   describe "GET new" do
     it "returns a new post form" do
+      should_authenticate_user
       should_find_board
       should_find_topic
 
@@ -55,6 +59,7 @@ describe PostsController do
 
   describe "POST create" do
     before :each do
+      should_authenticate_user
       should_find_board
       should_find_topic
 

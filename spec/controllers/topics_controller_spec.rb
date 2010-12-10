@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe TopicsController do
 
+  include ApplicationSpecHelperMethods
+
   it "#find_board" do
     @board = mock_model(Board)
     controller.params = {:board_id => 4}
@@ -55,6 +57,7 @@ describe TopicsController do
 
   describe "GET new" do
     it "returns a new topic form" do
+      should_authenticate_user
       should_find_board
       @topics = []
       @topic = mock_model(Topic)
@@ -71,6 +74,7 @@ describe TopicsController do
 
   describe "POST create" do
     before(:each) do
+      should_authenticate_user
       should_find_board
       
       @topics = []
