@@ -1,7 +1,7 @@
 <h2>Board: <%= @board.name %></h2>
 
 <%= will_paginate @topics %>
-<%= link_to "Create New Topic", new_board_topic_path(@board) %>
+<%= link_to("Create New Topic", new_board_topic_path(@board)) if user_signed_in? %>
 <table class="topics-list">
   <tr>
     <th>Title</th>

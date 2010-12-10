@@ -3,7 +3,7 @@
 </div>
 
 <div>
-  <%= link_to("Reply To This Topic", new_board_topic_post_path(@board, @topic)) %>
+  <%= link_to("Reply To This Topic", new_board_topic_post_path(@board, @topic)) if user_signed_in? %>
 </div>
 
 <h2><%= @topic.title %></h2>
