@@ -1,5 +1,7 @@
 namespace :dev do
-  task :build => ['db:drop', 'db:create', 'db:migrate'] do
+  
+  desc "Rebuild the database and create seed data"
+  task :build => ['db:drop', 'db:create', 'db:migrate', 'db:seed'] do
   end
 
   CATEGORY_NUM = 2
@@ -19,9 +21,11 @@ namespace :dev do
     end
   end
 
-  task :fake => ['environment', 'dev:build'] do
-
+  desc "Generate fake data"
+  task :fake => ['environment'] do
     ActiveRecord::Base.transaction do 
+      puts "Generating Categories..."
+
       2.times { Factory(:category) }
 
       subcategories = []
@@ -34,9 +38,13 @@ namespace :dev do
         end
       end
 
+      puts "Generating Boards..."
+
       subcategories.each do |category|
         BOARDS_PER_CATEGORY.times { Factory(:board, :category => category) }
       end
+
+      puts "Generating Topics..."
 
       all_boards = Board.all
       TOPICS_PER_BOARD.times do
@@ -45,13 +53,20 @@ namespace :dev do
         end
       end
 
+      puts "Generating Posts..."
+
       Topic.all.each do |topic|
         POSTS_PER_TOPIC.times do
           Factory(:post, :topic => topic)
         end
       end
-    end
 
+      user = Factory(:user, :email => "tester@mail.com", :password=>"123456")
+      puts "Generated a authenticated user(email=#{user.email}, password=#{user.password})"
+    end
+  end
+
+  desc "Run dev:build and dev:fake"
+  task :refake => ['dev:build', 'dev:fake'] do
   end
 end
-
