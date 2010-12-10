@@ -1,12 +1,12 @@
 <%= render :partial => "common/error", :locals => { :errors => @topic.errors } %>
 
 <p>
-<%= form.label(:title, "Title:") %>
-<%= form.text_field(:title) %>
+<%= f.label(:title, "Title:") %>
+<%= f.text_field(:title) %>
 </p>
 <p>
-<%= form.label(:content, "Content:") %> <br>
+<%= f.label(:content, "Content:") %> <br>
 <%= text_area(:post, :content) %>
 </p>
 <input type="button" id="preview-button" value="Preview" />
-<%= form.submit %>
+<%= f.submit %>

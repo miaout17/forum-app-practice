@@ -10,7 +10,7 @@ Board: <%= @board.name %>
 Title: <%= @topic.title %>
 </div>
 
-<%= form_for([@board, @topic, @post]) do |form| %>
-  <%= render :partial => "form", :object => form %>
+<%= form_for([@board, @topic, @post]) do |f| %>
+  <%= render :partial => "form", :locals => {:f => f} %>
 <% end %>
 

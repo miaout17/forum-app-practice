@@ -1,7 +1,7 @@
 <%= render :partial => "common/error", :locals => { :errors => @post.errors } %>
 
 <p>
-<%= form.label(:content, "Content:") %> <br>
+<%= f.label(:content, "Content:") %> <br>
 <%= text_area(:post, :content) %>
 </p>
-<%= form.submit %>
+<%= f.submit %>
