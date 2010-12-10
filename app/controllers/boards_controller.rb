@@ -1,6 +1,5 @@
 class BoardsController < ApplicationController
 
-  before_filter :load_categories, :only => [:show]
   before_filter :find_board, :only => [:show]
 
   def show

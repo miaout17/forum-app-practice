@@ -1,0 +1,8 @@
+---
+  :address: smtp.gmail.com
+  :port: 587
+  :domain : forum.local
+  :user_name: yourusername
+  :password : yourpassword
+  :authentication: :plain
+

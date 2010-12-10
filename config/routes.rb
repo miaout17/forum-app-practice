@@ -1,5 +1,7 @@
 ForumApp::Application.routes.draw do
   
+  devise_for :users
+
   resources :categories, :only => [:index, :show]
 
   resources :boards, :only => [:index, :show] do

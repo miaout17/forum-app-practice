@@ -20,6 +20,4 @@ class AttachmentsController < ApplicationController
     
   end
 
-  before_filter :load_categories
-
 end

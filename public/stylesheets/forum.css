@@ -1,3 +1,7 @@
 .category-tree ul {
   margin-bottom: 0px;
 }
+
+#user-block {
+  text-align: right; 
+}
