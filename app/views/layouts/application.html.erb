@@ -8,17 +8,15 @@
 </head>
 <body>
 
-<div class="flash-messages">
-  TODO: Adjust My Position<br/>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-</div>
 
 <div class="container_12">
   <div id="content" class="grid_9">
     <div class="box">
+      <div class="flash-messages">
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+      </div>
       <%= yield %>
-      &nbsp;
     </div>
   </div>
   <div id="sidebar" class="grid_3">
