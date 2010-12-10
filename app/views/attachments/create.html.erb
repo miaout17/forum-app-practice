@@ -8,4 +8,7 @@
   </div>
   <h3>Image Preview</h3>
   <%= image_tag(attachment.data.url) %>
+  <script language="Javascript" type="text/javascript">
+    window.opener.addAttachment(<%= "#{attachment.id}, '#{attachment.data.url}', '#{attachment.data.url(:thumb)}'" %>); 
+  </script>
 <% end %>

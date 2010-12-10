@@ -14,3 +14,16 @@ $(function() {
     return false;
   });
 }); 
+
+function addAttachment(id, img_url, thumb_url) {
+  var ids_input = $("input[id$='attachment_ids']"); 
+  var ids = ids_input.val(); 
+  if (ids!="")
+    ids += ","
+  var ids = ids + id; 
+  ids_input.val(ids); 
+
+  var img = "<img src='" + thumb_url + "'/>"
+  $("#attachment-preview").append(img); 
+};
+

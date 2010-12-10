@@ -14,3 +14,9 @@ Title: <%= @topic.title %>
   <%= render :partial => "form", :locals => {:f => f} %>
 <% end %>
 
+<div id="attachments">
+<%= link_to("New Attachment", new_attachment_path, :target => "_blank") %><br/>
+Attachments Preview: 
+<div id="attachment-preview"></div>
+</div>
+
