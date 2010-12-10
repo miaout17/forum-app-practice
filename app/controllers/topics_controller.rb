@@ -13,6 +13,8 @@ class TopicsController < ApplicationController
     @post = @topic.posts.build(params[:post])
 
     if @topic.save
+      attachment_ids = params[:attachment_ids].split(",").map { |i| i.to_i }
+      @post.attach_by_ids(attachment_ids)
       redirect_to board_topic_path(@board, @topic)
     else
       render :new

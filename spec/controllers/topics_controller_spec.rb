@@ -90,7 +90,14 @@ describe TopicsController do
 
     it "cretes a new topic successfully" do
       @topic.should_receive(:save).and_return(true)
-      post :create, {:board_id => 4, :topic => @topic_params, :post => @post_params}
+      @post.should_receive(:attach_by_ids).with([4, 7])
+
+      post :create, {
+        :board_id => 4,
+        :topic => @topic_params, 
+        :post => @post_params,
+        :attachment_ids => "4,7"
+      }
       response.should redirect_to(board_topic_path(@board, @topic))
     end
 
