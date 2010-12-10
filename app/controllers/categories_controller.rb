@@ -1,8 +1,7 @@
 class CategoriesController < ApplicationController
 
   def show
-    @topics = @category.descendant_topics
-    @topics = @topics.paginate :per_page => 10, :page => params[:page]
+    @topics = @category.descendant_topics.paginate(:per_page => 10, :page => params[:page])
   end
 
   protected

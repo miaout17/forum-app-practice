@@ -20,8 +20,7 @@ class TopicsController < ApplicationController
   end
 
   def show
-    @posts = @topic.posts
-    @posts = @posts.paginate :per_page => 10, :page => params[:page]
+    @posts = @topic.posts.paginate(:per_page => 10, :page => params[:page])
   end
 
   def preview
