@@ -4,4 +4,5 @@
 <%= f.label(:content, "Content:") %> <br>
 <%= text_area(:post, :content) %>
 </p>
+<%= hidden_field_tag(:attachment_ids, "") %>
 <%= f.submit %>

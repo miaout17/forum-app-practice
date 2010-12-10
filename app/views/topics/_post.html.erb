@@ -8,4 +8,13 @@
   <div class="content">
     <%= simple_format(post.content) %>
   </div>
+  <% unless post.attachments.empty? %>
+  <div class="attachments">
+    Attachments: <br>
+    <% post.attachments.each do |attachment| %>
+      <%= link_to(image_tag(attachment.data.url(:thumb)), attachment.data.url) %> 
+      <br/>
+    <% end %>
+  </div>
+  <% end %>
 </div>
