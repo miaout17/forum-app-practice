@@ -17,4 +17,28 @@ describe Attachment do
       @attachment.should_not be_valid
     end
   end
+
+  describe "instance" do
+    before(:each) do
+      @attachment = Factory(:attachment)
+      @attachment.post.should be_nil
+      @post = Factory(:post)
+      @another_post = Factory(:post)
+    end
+    
+    describe "which doesn't belongs to a post" do
+      it "could be attached to a post " do
+        @attachment.attach(@post).should be
+        @attachment.post.should == @post
+      end
+    end
+
+    describe "which already belongs to a post" do
+      it "cannot be attached to a post " do
+        @attachment.attach(@post)
+        @attachment.attach(@another_post).should_not be
+        @attachment.post.should == @post
+      end
+    end
+  end
 end
