@@ -19,13 +19,5 @@ class PostsController < ApplicationController
 
   protected
 
-  def find_board
-    @board = Board.find(params[:board_id])
-  end
-
-  def find_topic
-    @topic = @board.topics.find(params[:topic_id])
-  end
-
 end
 

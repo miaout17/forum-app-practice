@@ -13,4 +13,12 @@ class ApplicationController < ActionController::Base
     @root_categories = categories.select { |category| category.parent_id.nil? }
   end
 
+  def find_board
+    @board = Board.find(params[:board_id]?params[:board_id]:params[:id]) 
+  end
+
+  def find_topic
+    @topic = @board.topics.find(params[:topic_id]?params[:topic_id]:pramas[:id])
+  end
+
 end

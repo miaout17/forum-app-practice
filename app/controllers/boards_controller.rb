@@ -9,8 +9,4 @@ class BoardsController < ApplicationController
   
   protected
 
-  def find_board
-    @board = Board.find(params[:id])
-  end
-
 end
