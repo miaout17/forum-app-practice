@@ -9,7 +9,8 @@
   </div>
 <% end %>
 
-Content: <br/>
-<%= form.text_area(:content) %>
-
+<p>
+<%= form.label(:content, "Content:") %> <br>
+<%= text_area(:post, :content) %>
+</p>
 <%= form.submit %>

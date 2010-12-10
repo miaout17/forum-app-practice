@@ -1,5 +1,9 @@
 class TopicsController < ApplicationController
 
+  before_filter :load_categories
+  before_filter :find_board
+  before_filter :find_topic, :only => [:show]
+
   def new
     @topic = @board.topics.build
   end
@@ -26,10 +30,6 @@ class TopicsController < ApplicationController
   end
 
   protected
-
-  before_filter :load_categories
-  before_filter :find_board
-  before_filter :find_topic, :only => [:show]
 
   def find_board
     @board = Board.find(params[:board_id])

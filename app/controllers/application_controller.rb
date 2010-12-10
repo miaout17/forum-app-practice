@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
     categories.each do |category| 
       @all_categories[category.id] = category
     end
-    @root_categories = categories.select { |category| category.parent==nil }
+    @root_categories = categories.select { |category| category.parent_id.nil? }
   end
 
 end

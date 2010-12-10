@@ -9,11 +9,13 @@
   </div>
 <% end %>
 
-Title: <br/>
+<p>
+<%= form.label(:title, "Title:") %>
 <%= form.text_field(:title) %>
-<br/>
-Content: <br/>
+</p>
+<p>
+<%= form.label(:content, "Content:") %> <br>
 <%= text_area(:post, :content) %>
-<br/>
+</p>
 <input type="button" id="preview-button" value="Preview" />
 <%= form.submit %>

@@ -34,9 +34,8 @@ class Category < ActiveRecord::Base
   end
 
   def descendant_boards
-    boards = descendant_categories.collect do |category|
-      category.boards
-    end.flatten
+    category_ids = descendant_categories.map { |c| c.id }
+    boards = Board.where( :category_id => category_ids )
     return boards
   end
 

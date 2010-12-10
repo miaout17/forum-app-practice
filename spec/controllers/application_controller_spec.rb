@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ApplicationController do
   it "#load_categories" do
     @category = mock_model(Category)
-    @category.stub!(:parent).and_return(nil)
+    @category.stub!(:parent_id).and_return(nil)
     @categories = [ @category ]
 
     Category.should_receive(:all).and_return(@categories)
