@@ -31,4 +31,11 @@ class Topic < ActiveRecord::Base
     end
   end
 
+  def last_replies(count) 
+    if count >= posts_count
+      count = posts_count - 1
+    end
+    return posts.last(count)
+  end
+
 end

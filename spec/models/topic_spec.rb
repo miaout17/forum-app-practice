@@ -47,6 +47,8 @@ describe Topic do
   describe "instance" do
     before :each do
       @topic = Factory(:topic)
+      @origin_post = Factory(:post, :topic => @topic, :user => @topic.user)
+      @topic.reload
     end
 
     it "should be able to get its board" do
@@ -55,16 +57,14 @@ describe Topic do
     end
 
     it "should be able to get its posts" do
-      post = Factory(:post, :topic => @topic)
-      @topic.reload
-      @topic.posts.should include(post)
+      @topic.posts.should include(@origin_post)
     end
 
     it "should cache its posts count" do
-      @topic.posts_count.should == 0
+      @topic.posts_count.should == 1
       Factory(:post, :topic => @topic)
       @topic.reload
-      @topic.posts_count.should == 1
+      @topic.posts_count.should == 2
     end
 
     it "could get its author" do
@@ -72,9 +72,6 @@ describe Topic do
     end
 
     describe "#last_reply" do
-      before(:each) do
-        @origin_post = Factory(:post, :topic => @topic, :user => @topic.user)
-      end
 
       it "returns the last reply if exists" do
         reply = nil
@@ -88,6 +85,27 @@ describe Topic do
       it "return nil if no one replies" do
         @topic.reload
         @topic.last_reply.should be_nil
+      end
+    end
+
+    describe "#last_replies" do
+
+      it "returns [] if on one replies" do
+        @topic.last_replies(1).should == []
+      end
+
+      it "returns last n replies if replies is enough" do
+        5.times { Factory(:post, :topic => @topic) }
+        @topic.reload
+
+        @topic.last_replies(3).should == @topic.posts.last(3)
+      end
+
+      it "returns all replies if replies is not enough" do
+        5.times { Factory(:post, :topic => @topic) }
+        @topic.reload
+        @topic.last_replies(10).should_not include(@origin_post)
+        @topic.last_replies(10).should == @topic.posts.last(5)
       end
 
     end
