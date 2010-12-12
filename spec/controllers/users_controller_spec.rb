@@ -20,6 +20,7 @@ describe UsersController do
   describe "GET show" do
     it "gets the user by id" do
       should_find_user
+      get :show, :id => 4
     end
   end
 

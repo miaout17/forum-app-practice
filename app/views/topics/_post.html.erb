@@ -1,4 +1,9 @@
 <div class="post">
+  <div class="function-links">
+    <% if user_signed_in? and post.user_id==current_user.id %>
+      <%= link_to("Edit Post", edit_board_topic_post_path(@board, @topic, post)) %>
+    <% end %>
+  </div>
   <div class="author">
     Author: <%= user_link(post.user) %>
   </div>

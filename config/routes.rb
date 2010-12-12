@@ -9,7 +9,7 @@ ForumApp::Application.routes.draw do
 
   resources :boards, :only => [:index, :show] do
     resources :topics, :except => [:edit, :update, :destroy] do
-      resources :posts, :only => [:new, :create, :destroy]
+      resources :posts, :only => [:new, :create, :edit, :update]
       get :preview, :on => :collection
     end
   end
