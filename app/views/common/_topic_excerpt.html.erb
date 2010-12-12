@@ -1,0 +1,19 @@
+<div class="grid_9 alpha omega">
+
+  <div class="topic-excerpt">
+    <div class="topic grid_6 alpha">
+      <%= link_to(topic.title, board_topic_path(topic.board_id, topic)) %> <br/>
+      <%= topic.created_at %>  <br/>
+      <%= topic.posts.first.content %> <br/>
+    </div>
+    <div class="reply grid_3 omega">
+      <% topic.last_replies(3).each do |reply| %>
+        <div class="reply-excerpt">
+          <%= user_link(reply.user) %> : 
+          <%= reply.content %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+</div>

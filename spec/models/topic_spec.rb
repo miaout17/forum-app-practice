@@ -98,14 +98,14 @@ describe Topic do
         5.times { Factory(:post, :topic => @topic) }
         @topic.reload
 
-        @topic.last_replies(3).should == @topic.posts.last(3)
+        @topic.last_replies(3).should == @topic.posts.last(3).reverse
       end
 
       it "returns all replies if replies is not enough" do
         5.times { Factory(:post, :topic => @topic) }
         @topic.reload
         @topic.last_replies(10).should_not include(@origin_post)
-        @topic.last_replies(10).should == @topic.posts.last(5)
+        @topic.last_replies(10).should == @topic.posts.last(5).reverse
       end
 
     end

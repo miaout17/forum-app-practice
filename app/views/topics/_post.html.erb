@@ -1,6 +1,6 @@
 <div class="post">
   <div class="author">
-    Author: <%= post.user.name %>
+    Author: <%= user_link(post.user) %>
   </div>
   <div class="post-time">
     Posted at: <%= post.created_at %>

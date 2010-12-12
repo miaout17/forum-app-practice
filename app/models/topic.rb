@@ -31,11 +31,14 @@ class Topic < ActiveRecord::Base
     end
   end
 
+  # Return last replies with reverse order
+  # (Newest first, doesn't reply the original post
   def last_replies(count) 
     if count >= posts_count
       count = posts_count - 1
     end
-    return posts.last(count)
+    # return posts.last(count).reverse
+    return Post.where(:topic_id => id).limit(count).order('id DESC')
   end
 
 end

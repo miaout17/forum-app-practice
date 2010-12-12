@@ -11,12 +11,12 @@
     <%= topic.posts_count - 1 %>
   </td>
   <td>
-    <%= topic.user.name %><br/>
+    <%= user_link(topic.user)%><br/>
     <%= topic.created_at %>
   </td>
   <td>
     <% if topic.last_reply %>
-      <%= topic.last_reply.user.name %><br/>
+      <%= user_link(topic.last_reply.user)%><br/>
       <%= topic.last_reply.created_at %>
     <% else %>
       None

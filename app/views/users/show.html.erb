@@ -12,3 +12,8 @@
     Posts: <%= @user.posts_count %>
   </li>
 </ul>
+
+<%= render :partial => "common/topic_excerpt", 
+  :collection => @user.topics.last(10), 
+  :as => :topic
+%>
