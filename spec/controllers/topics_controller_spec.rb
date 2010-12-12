@@ -90,6 +90,9 @@ describe TopicsController do
 
       @topic.stub!(:posts).and_return(@posts)
       @posts.should_receive(:build).and_return(@post)
+
+      @topic.should_receive(:user=).with(@current_user)
+      @post.should_receive(:user=).with(@current_user)
     end
 
     it "cretes a new topic successfully" do

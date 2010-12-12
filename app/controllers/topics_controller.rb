@@ -12,6 +12,9 @@ class TopicsController < ApplicationController
     @topic = @board.topics.build(params[:topic])
     @post = @topic.posts.build(params[:post])
 
+    @topic.user = current_user
+    @post.user = current_user
+
     if @topic.save
       attachment_ids = params[:attachment_ids].split(",").map { |i| i.to_i }
       @post.attach_by_ids(attachment_ids)
