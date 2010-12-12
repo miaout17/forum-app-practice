@@ -28,6 +28,8 @@ class PostsController < ApplicationController
 
   def update
     if @post.update_attributes(params[:post])
+      attachment_ids = params[:attachment_ids].split(",").map { |i| i.to_i }
+      @post.attach_by_ids(attachment_ids)
       redirect_to(board_topic_url(@board, @topic))
     else
       render :edit
