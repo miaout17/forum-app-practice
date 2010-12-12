@@ -5,6 +5,7 @@
     <% end %>
   </div>
   <div class="author">
+    <%= user_icon_tag(post.user, :thumb) %>
     Author: <%= user_link(post.user) %>
   </div>
   <div class="post-time">

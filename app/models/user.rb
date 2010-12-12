@@ -39,12 +39,15 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :name
+  has_attached_file :icon, :styles => {
+    :thumb => ["100x100#", :png],
+    :icon => ["32x32#", :png],
+  }
+
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :icon
 
   has_many :topics
   has_many :posts
-
-  has_attached_file :icon, :styles => {:thumb => ["100x100#", :png]}
 
   validates_presence_of :name
   validates_uniqueness_of :name

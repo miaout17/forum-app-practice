@@ -9,6 +9,7 @@
     <div class="reply grid_3 omega">
       <% topic.last_replies(3).each do |reply| %>
         <div class="reply-excerpt">
+          <%= user_icon_tag(reply.user, :icon) %>
           <%= user_link(reply.user) %> : 
           <%= reply.content %>
         </div>
