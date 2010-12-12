@@ -71,5 +71,26 @@ describe Topic do
       @topic.user.should be
     end
 
+    describe "#last_reply" do
+      before(:each) do
+        @origin_post = Factory(:post, :topic => @topic, :user => @topic.user)
+      end
+
+      it "returns the last reply if exists" do
+        reply = nil
+        3.times do
+          reply = Factory(:post, :topic => @topic, :user => @topic.user)
+        end
+        @topic.reload
+        @topic.last_reply.should eq(reply)
+      end
+
+      it "return nil if no one replies" do
+        @topic.reload
+        @topic.last_reply.should be_nil
+      end
+
+    end
+
   end
 end

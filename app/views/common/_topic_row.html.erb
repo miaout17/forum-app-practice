@@ -15,9 +15,9 @@
     <%= topic.created_at %>
   </td>
   <td>
-    <% if topic.posts.count > 1 %>
-      <%= topic.posts.last.user.name %><br/>
-      <%= topic.posts.last.created_at %>
+    <% if topic.last_reply %>
+      <%= topic.last_reply.user.name %><br/>
+      <%= topic.last_reply.created_at %>
     <% else %>
       None
     <% end %>

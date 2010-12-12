@@ -22,4 +22,13 @@ class Topic < ActiveRecord::Base
   default_scope :order => 'id DESC'
 
   validates_presence_of :title, :board_id, :user_id
+
+  def last_reply
+    if posts_count <= 1
+      return nil
+    else
+      return posts.last
+    end
+  end
+
 end
