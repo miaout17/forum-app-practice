@@ -5,9 +5,10 @@ namespace :dev do
   end
 
   CATEGORY_NUM = 2
-  BOARDS_PER_CATEGORY = 2
-  TOPICS_PER_BOARD = 10
-  POSTS_PER_TOPIC = 12
+  SUBCATEGORY_NUM = 2
+  BOARDS_PER_SUBCATEGORY = 2
+  TOPICS_PER_BOARD = 11
+  POSTS_PER_TOPIC = 11
 
   def create_hierarchical_categories(parent, num, level)
     return unless level > 0
@@ -24,15 +25,17 @@ namespace :dev do
   desc "Generate fake data"
   task :fake => ['environment'] do
     ActiveRecord::Base.transaction do 
+      @user = Factory(:user)
+
       puts "Generating Categories..."
 
-      2.times { Factory(:category) }
+      CATEGORY_NUM.times { Factory(:category) }
 
       subcategories = []
 
       # create_hierarchical_categories( Factory(:category), 2, 2)
       Category.all.each do |category|
-        3.times do
+        SUBCATEGORY_NUM.times do
           subcategory = Factory(:category, :parent => category)
           subcategories << subcategory
         end
@@ -41,7 +44,7 @@ namespace :dev do
       puts "Generating Boards..."
 
       subcategories.each do |category|
-        BOARDS_PER_CATEGORY.times { Factory(:board, :category => category) }
+        BOARDS_PER_SUBCATEGORY.times { Factory(:board, :category => category) }
       end
 
       puts "Generating Topics..."
@@ -49,7 +52,7 @@ namespace :dev do
       all_boards = Board.all
       TOPICS_PER_BOARD.times do
         all_boards.each do |board|
-          Factory(:topic, :board => board)
+          Factory(:topic, :board => board, :user => @user)
         end
       end
 
@@ -57,7 +60,7 @@ namespace :dev do
 
       Topic.all.each do |topic|
         POSTS_PER_TOPIC.times do
-          Factory(:post, :topic => topic)
+          Factory(:post, :topic => topic, :user => @user)
         end
       end
 
