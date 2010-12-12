@@ -15,8 +15,8 @@
 #
 
 class Topic < ActiveRecord::Base
-  belongs_to :board
-  belongs_to :user
+  belongs_to :board, :counter_cache => true
+  belongs_to :user, :counter_cache => true
   has_many :posts, :inverse_of => :topic
 
   default_scope :order => 'id DESC'

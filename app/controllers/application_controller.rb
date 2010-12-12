@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   end
 
   def find_topic
-    @topic = @board.topics.find(params[:topic_id]?params[:topic_id]:pramas[:id])
+    @topic = @board.topics.find(params[:topic_id]?params[:topic_id]:params[:id])
   end
 
 end

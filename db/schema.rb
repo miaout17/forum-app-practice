@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101210082550) do
+ActiveRecord::Schema.define(:version => 20101212053707) do
 
   create_table "attachments", :force => true do |t|
     t.string   "data_file_name"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20101210082550) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "category_id"
+    t.integer  "topics_count", :default => 0
   end
 
   add_index "boards", ["category_id"], :name => "index_boards_on_category_id"
@@ -83,6 +84,8 @@ ActiveRecord::Schema.define(:version => 20101210082550) do
     t.string   "icon_content_type"
     t.integer  "icon_file_size"
     t.datetime "icon_updated_at"
+    t.integer  "topics_count",                        :default => 0
+    t.integer  "posts_count",                         :default => 0
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

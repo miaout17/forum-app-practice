@@ -1,6 +1,9 @@
 ForumApp::Application.routes.draw do
   
-  devise_for :users
+  devise_for :users 
+  
+  resources :users, :only => [:show] do
+  end
 
   resources :categories, :only => [:index, :show]
 

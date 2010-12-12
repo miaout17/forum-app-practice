@@ -19,7 +19,7 @@ class Post < ActiveRecord::Base
   # Reference: 
   # https://rails.lighthouseapp.com/projects/8994/tickets/2815-nested-models-build-should-directly-assign-the-parent
   belongs_to :topic, :inverse_of => :posts, :counter_cache => true
-  belongs_to :user
+  belongs_to :user, :counter_cache => true
   has_many :attachments
 
   validates_presence_of :content, :topic, :user_id
