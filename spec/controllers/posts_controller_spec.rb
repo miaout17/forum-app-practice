@@ -60,12 +60,12 @@ describe PostsController do
   end
 
   def should_require_author
-    @post.should_receive(:user).and_return(@current_user)
+    @post.should_receive(:editable_by?).and_return(true)
   end
 
   def should_redirect_unless_author
     another_user = mock_model(User)
-    @post.should_receive(:user).and_return(another_user)
+    @post.should_receive(:editable_by?).and_return(false)
     yield
     response.should redirect_to(board_topic_url(@board, @topic))
   end

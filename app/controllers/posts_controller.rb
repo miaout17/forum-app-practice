@@ -41,7 +41,7 @@ class PostsController < ApplicationController
   end
 
   def require_author!
-    unless @post.user_id == current_user.id
+    unless @post.editable_by?(current_user)
       flash.alert="You are unable to edit this post" 
       redirect_to board_topic_path(@board, @topic)
     end

@@ -31,4 +31,9 @@ class Post < ActiveRecord::Base
     end
   end
 
+  def editable_by?(user)
+    return false if user.nil?
+    return user_id == user.id
+  end
+
 end
