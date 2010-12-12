@@ -20,7 +20,6 @@ class PostsController < ApplicationController
       render :new
     end
 
-
   end
 
   protected

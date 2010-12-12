@@ -2,16 +2,24 @@
   <td>
     <%= link_to(topic.title, board_topic_path(topic.board, topic)) %>
   </td>
+  <% if board_column %>
   <td>
     <%= link_to(topic.board.name, board_path(topic.board)) %>
   </td>
+  <% end %>
   <td>
     <%= topic.posts_count - 1 %>
   </td>
   <td>
+    <%= topic.user.name %><br/>
     <%= topic.created_at %>
   </td>
   <td>
-    TBD
+    <% if topic.posts.count > 1 %>
+      <%= topic.posts.last.user.name %><br/>
+      <%= topic.posts.last.created_at %>
+    <% else %>
+      None
+    <% end %>
   </td>
 </tr>

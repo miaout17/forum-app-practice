@@ -9,7 +9,7 @@
     <th>Author</th>
     <th>Last Replied</th>
   </tr>
-  <%= render :partial => "topic", :collection => @topics %>
+  <%= render :partial => "common/topic_row", :collection => @topics, :as => :topic, :locals => {:board_column => true} %>
 </table>
 <%= will_paginate @topics %>
 

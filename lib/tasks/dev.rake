@@ -64,7 +64,7 @@ namespace :dev do
         end
       end
 
-      user = Factory(:user, :email => "tester@mail.com", :password=>"123456")
+      user = Factory(:user, :email => "tester@mail.com", :password => "123456", :name => "Tester Account")
       puts "Generated a authenticated user(email=#{user.email}, password=#{user.password})"
     end
   end
