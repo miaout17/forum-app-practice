@@ -59,6 +59,15 @@ describe User do
     it "must have password" do
       User.new(@params.except(:password)).should_not be_valid
     end
+
+    it "user name must be unique" do
+      user = User.new(@params)
+      user.save!
+
+      new_user = Factory.build(:user, :name => @params[:name])
+      new_user.should_not be_valid
+    end
+
   end
 
   describe "instance" do

@@ -47,5 +47,6 @@ class User < ActiveRecord::Base
   has_attached_file :icon, :styles => {:thumb => ["100x100#", :png]}
 
   validates_presence_of :name
+  validates_uniqueness_of :name
 
 end

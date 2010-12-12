@@ -26,6 +26,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
     add_index :users, :confirmation_token,   :unique => true
     # add_index :users, :unlock_token,         :unique => true
 
+    add_index :users, :name, :unique => true
+
     add_column :topics, :user_id, :integer, :default => nil
     add_column :posts, :user_id, :integer, :default => nil
 
