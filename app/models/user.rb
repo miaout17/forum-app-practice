@@ -49,4 +49,12 @@ class User < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name
 
+  # Hack: prevent devise to destroy user
+  protected
+  def destroy_guard
+    raise "User Cannot be Deleted"
+  end
+  before_destroy :destroy_guard
+
 end
+

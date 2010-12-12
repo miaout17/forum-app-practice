@@ -92,6 +92,11 @@ describe User do
       @user.posts.should =~ [post, reply]
     end
 
+    it "could not be destroied" do
+      user_id = @user.id
+      lambda { @user.destroy }.should raise_error
+      User.find(user_id).should be
+    end
 
   end
 
