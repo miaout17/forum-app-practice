@@ -10,6 +10,7 @@ class PostsController < ApplicationController
 
   def create
     @post = @topic.posts.build(params[:post])
+    @post.user = current_user
 
     if @post.save
       attachment_ids = params[:attachment_ids].split(",").map { |i| i.to_i }

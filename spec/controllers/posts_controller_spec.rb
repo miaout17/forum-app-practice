@@ -69,6 +69,7 @@ describe PostsController do
 
       @params = { "content" => Faker::Lorem.sentence }
       @posts.should_receive(:build).with(@params).and_return(@post)
+      @post.should_receive(:user=).with(@current_user)
     end
 
     it "creates successfully" do
