@@ -1,6 +1,6 @@
 ForumApp::Application.routes.draw do
   
-  devise_for :users 
+  devise_for :users, :controllers => { :registrations => "users/registrations" }
   
   resources :users, :only => [:show] do
   end
