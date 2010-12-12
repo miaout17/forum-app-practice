@@ -2,11 +2,12 @@
 #
 # Table name: topics
 #
-#  id         :integer(4)      not null, primary key
-#  board_id   :integer(4)
-#  title      :string(255)
-#  created_at :datetime
-#  updated_at :datetime
+#  id          :integer         not null, primary key
+#  board_id    :integer
+#  title       :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  posts_count :integer         default(0)
 #
 # Indexes
 #
@@ -15,9 +16,10 @@
 
 class Topic < ActiveRecord::Base
   belongs_to :board
+  belongs_to :user
   has_many :posts, :inverse_of => :topic
 
   default_scope :order => 'id DESC'
 
-  validates_presence_of :title, :board_id
+  validates_presence_of :title, :board_id, :user_id
 end

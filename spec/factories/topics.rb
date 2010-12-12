@@ -3,4 +3,5 @@
 Factory.define :topic do |f|
   f.sequence(:title) { Faker::Lorem.sentence }
   f.association :board
+  f.association :user
 end

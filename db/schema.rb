@@ -43,9 +43,11 @@ ActiveRecord::Schema.define(:version => 20101210082550) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   add_index "posts", ["topic_id"], :name => "index_posts_on_topic_id"
+  add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 
   create_table "topics", :force => true do |t|
     t.integer  "board_id"
@@ -53,9 +55,11 @@ ActiveRecord::Schema.define(:version => 20101210082550) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "posts_count", :default => 0
+    t.integer  "user_id"
   end
 
   add_index "topics", ["board_id"], :name => "index_topics_on_board_id"
+  add_index "topics", ["user_id"], :name => "index_topics_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                               :default => "", :null => false

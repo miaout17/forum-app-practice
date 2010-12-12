@@ -2,8 +2,8 @@
 #
 # Table name: posts
 #
-#  id         :integer(4)      not null, primary key
-#  topic_id   :integer(4)
+#  id         :integer         not null, primary key
+#  topic_id   :integer
 #  content    :text
 #  created_at :datetime
 #  updated_at :datetime
@@ -19,10 +19,10 @@ class Post < ActiveRecord::Base
   # Reference: 
   # https://rails.lighthouseapp.com/projects/8994/tickets/2815-nested-models-build-should-directly-assign-the-parent
   belongs_to :topic, :inverse_of => :posts, :counter_cache => true
+  belongs_to :user
   has_many :attachments
 
-  validates_presence_of :content
-  validates_presence_of :topic
+  validates_presence_of :content, :topic, :user_id
 
   def attach_by_ids(attachment_ids)
     attachments = Attachment.where(:id => attachment_ids)

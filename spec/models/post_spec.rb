@@ -2,8 +2,8 @@
 #
 # Table name: posts
 #
-#  id         :integer(4)      not null, primary key
-#  topic_id   :integer(4)
+#  id         :integer         not null, primary key
+#  topic_id   :integer
 #  content    :text
 #  created_at :datetime
 #  updated_at :datetime
@@ -21,6 +21,7 @@ describe Post do
       @topic = Factory(:topic)
       @params = {
         :topic => @topic,
+        :user_id => 8,
         :content => Faker::Lorem.sentence,
       }
     end
@@ -35,6 +36,10 @@ describe Post do
 
     it "must belong to a topic" do
       Post.new(@params.except(:topic)).should_not be_valid
+    end
+
+    it "must belong to a user" do
+      Post.new(@params.except(:user_id)).should_not be_valid
     end
   end
 
@@ -57,5 +62,10 @@ describe Post do
       @post.attachments.count.should == 2
       @post.attachments.should =~ attachments
     end
+
+    it "could get its author" do
+      @post.user.should be
+    end
+
   end
 end

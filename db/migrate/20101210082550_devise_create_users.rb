@@ -25,9 +25,18 @@ class DeviseCreateUsers < ActiveRecord::Migration
     add_index :users, :reset_password_token, :unique => true
     add_index :users, :confirmation_token,   :unique => true
     # add_index :users, :unlock_token,         :unique => true
+
+    add_column :topics, :user_id, :integer, :default => nil
+    add_column :posts, :user_id, :integer, :default => nil
+
+    add_index :topics, :user_id
+    add_index :posts, :user_id
   end
 
   def self.down
     drop_table :users
+
+    remove_column :topics, :user_id
+    remove_column :posts, :user_id
   end
 end

@@ -2,12 +2,12 @@
 #
 # Table name: topics
 #
-#  id          :integer(4)      not null, primary key
-#  board_id    :integer(4)
+#  id          :integer         not null, primary key
+#  board_id    :integer
 #  title       :string(255)
 #  created_at  :datetime
 #  updated_at  :datetime
-#  posts_count :integer(4)      default(0)
+#  posts_count :integer         default(0)
 #
 # Indexes
 #
@@ -22,6 +22,7 @@ describe Topic do
       @params = {
         :title => Faker::Lorem.sentence,
         :board_id => 3,
+        :user_id => 7,
       }
     end
 
@@ -36,6 +37,11 @@ describe Topic do
     it "must belong to a board" do
       Topic.new(@params.except(:board_id)).should_not be_valid
     end
+
+    it "must belong to a user" do
+      Topic.new(@params.except(:user_id)).should_not be_valid
+    end
+    
   end
 
   describe "instance" do
@@ -60,5 +66,10 @@ describe Topic do
       @topic.reload
       @topic.posts_count.should == 1
     end
+
+    it "could get its author" do
+      @topic.user.should be
+    end
+
   end
 end
