@@ -1,3 +1,6 @@
+<% content_for(:sidebar) do %>
+  <%=render :partial => "categories/category_tree" %>
+<% end %>
 <div>
   Forum &gt;&gt; <%= link_to(@board.name, board_path(@board)) %>
 </div>

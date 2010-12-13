@@ -14,22 +14,27 @@
     <%= render :partial => "common/user_block" %>
   </div>
   <div class="clear"></div>
-  <div id="content" class="grid_9">
+
+  <div id="content" class="grid_<%= content_for?(:sidebar) ? 9 : 12 %>">
     <div class="box">
       <div class="flash-messages">
         <p class="notice"><%= notice %></p>
         <p class="alert"><%= alert %></p>
       </div>
-      <%= yield %>
+      <%= content_for?(:main_content) ? yield(:main_content) : yield %>
     </div>
   </div>
-  <div id="sidebar" class="grid_3">
-    <div class="box">
-      <h2>Sidebar</h2>
-      <%= render :partial => "categories/category_tree" %>
+
+  <% if content_for?(:sidebar) %>
+    <div id="sidebar" class="grid_3">
+      <div class="box">
+        <h2>Sidebar</h2>
+        <%= yield :sidebar %>
+      </div>
     </div>
-  </div>
+  <% end %>
 </div>
 
 </body>
 </html>
+

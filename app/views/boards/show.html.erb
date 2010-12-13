@@ -1,3 +1,6 @@
+<% content_for(:sidebar) do %>
+  <%=render :partial => "categories/category_tree" %>
+<% end %>
 <h2>Board: <%= @board.name %></h2>
 
 <%= will_paginate @topics %>
