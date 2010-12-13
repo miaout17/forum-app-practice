@@ -165,8 +165,15 @@ describe PostsController do
     it "update successfully with valid params" do
       should_require_author
       @post.should_receive(:update_attributes).with(@params).and_return(true)
+      @post.should_receive(:attach_by_ids).with([3, 5])
 
-      put :update, {:board_id => 4, :topic_id => 2, :id => 3, :post => @params}
+      post :update, {
+        :board_id => 4, 
+        :topic_id => 6,
+        :id => 3, 
+        :post => @params, 
+        :attachment_ids => "3,5"
+      }
 
       response.should redirect_to(board_topic_url(@board, @topic))
     end
