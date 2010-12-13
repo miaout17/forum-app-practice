@@ -39,6 +39,13 @@ describe TopicsController do
     controller.should_receive(:find_topic) { controller.instance_variable_set("@topic", @topic) }.ordered
   end
 
+  def should_find_new_attachments 
+    @new_attachments = [ mock_model(Attachment), mock_model(Attachment) ]
+    controller.should_receive(:find_new_attachments) {
+      controller.instance_variable_set("@new_attachments", @new_attachments)
+    }.ordered
+  end
+
   describe "GET show" do
     it "returns the topic ant its posts" do
       should_find_board
@@ -76,6 +83,7 @@ describe TopicsController do
     before(:each) do
       should_authenticate_user
       should_find_board
+      should_find_new_attachments
       
       @topics = []
       @topic = mock_model(Topic)
@@ -97,7 +105,7 @@ describe TopicsController do
 
     it "cretes a new topic successfully" do
       @topic.should_receive(:save).and_return(true)
-      @post.should_receive(:attach_by_ids).with([4, 7])
+      @post.should_receive(:obtain_attachments).with(@new_attachments)
 
       post :create, {
         :board_id => 4,

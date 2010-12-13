@@ -3,6 +3,7 @@ class TopicsController < ApplicationController
   before_filter :authenticate_user!, :only => [:new, :create]
   before_filter :find_board
   before_filter :find_topic, :only => [:show]
+  before_filter :find_new_attachments, :only => [:create]
 
   def new
     @topic = @board.topics.build
@@ -16,8 +17,7 @@ class TopicsController < ApplicationController
     @post.user = current_user
 
     if @topic.save
-      attachment_ids = params[:attachment_ids].split(",").map { |i| i.to_i }
-      @post.attach_by_ids(attachment_ids)
+      @post.obtain_attachments(@new_attachments)
       redirect_to board_topic_path(@board, @topic)
     else
       render :new
