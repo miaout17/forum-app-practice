@@ -15,7 +15,7 @@
   </div>
   <div class="clear"></div>
 
-  <div id="content" class="grid_<%= content_for?(:sidebar) ? 9 : 12 %>">
+  <%= content_tag(:div, :class => "grid_#{content_for(:sidebar) ? 9 : 12}") do %>
     <div class="box">
       <div class="flash-messages">
         <p class="notice"><%= notice %></p>
@@ -23,7 +23,7 @@
       </div>
       <%= content_for?(:main_content) ? yield(:main_content) : yield %>
     </div>
-  </div>
+  <% end %>
 
   <% if content_for?(:sidebar) %>
     <div id="sidebar" class="grid_3">
