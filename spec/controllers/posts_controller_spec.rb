@@ -44,6 +44,16 @@ describe PostsController do
     assigns(:post).should eq(@post)
   end
 
+  it "#find_new_attachments" do
+    @new_attachments = [ mock_model(Attachment), mock_model(Attachment) ]
+    @attachment_ids = "3,5"
+    controller.params = { :attachment_ids => @attachment_ids }
+
+    Attachment.should_receive(:where).with(:id => [3,5]).and_return(@new_attachments)
+    controller.send(:find_new_attachments)
+    assigns(:new_attachments).should eq(@new_attachments)
+  end
+
   def should_find_board
     @board = mock_model(Board)
     controller.should_receive(:find_board) { controller.instance_variable_set("@board", @board) }.ordered
@@ -70,6 +80,13 @@ describe PostsController do
     response.should redirect_to(board_topic_url(@board, @topic))
   end
 
+  def should_find_new_attachments 
+    @new_attachments = [ mock_model(Attachment), mock_model(Attachment) ]
+    controller.should_receive(:find_new_attachments) {
+      controller.instance_variable_set("@new_attachments", @new_attachments)
+    }.ordered
+  end
+
   describe "GET new" do
     it "returns a new post form" do
       should_authenticate_user
@@ -93,6 +110,7 @@ describe PostsController do
       should_authenticate_user
       should_find_board
       should_find_topic
+      should_find_new_attachments
 
       @posts = []
       @topic.stub!(:posts).and_return(@posts)
@@ -105,7 +123,7 @@ describe PostsController do
 
     it "creates successfully" do
       @post.should_receive(:save).and_return(true)
-      @post.should_receive(:attach_by_ids).with([3, 5])
+      @post.should_receive(:obtain_attachments).with(@new_attachments)
 
       post :create, {
         :board_id => 4, 
@@ -157,6 +175,7 @@ describe PostsController do
       should_find_board
       should_find_topic
       should_find_post
+      should_find_new_attachments
       @params = { 
         "content" => Faker::Lorem.sentence 
       }
@@ -165,7 +184,7 @@ describe PostsController do
     it "update successfully with valid params" do
       should_require_author
       @post.should_receive(:update_attributes).with(@params).and_return(true)
-      @post.should_receive(:attach_by_ids).with([3, 5])
+      @post.should_receive(:obtain_attachments).with(@new_attachments)
 
       post :update, {
         :board_id => 4, 

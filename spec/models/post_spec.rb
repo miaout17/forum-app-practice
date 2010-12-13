@@ -53,11 +53,10 @@ describe Post do
       topic.should be
     end
 
-    it "could be attached by attachment_ids" do
+    it "could be attached by obtain_attachments" do
       attachments = []
       2.times { attachments << Factory(:attachment) }
-      attachment_ids = attachments.map { |a| a.id }
-      @post.attach_by_ids(attachment_ids)
+      @post.obtain_attachments(attachments)
       @post.reload
       @post.attachments.count.should == 2
       @post.attachments.should =~ attachments

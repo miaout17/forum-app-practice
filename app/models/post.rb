@@ -24,8 +24,7 @@ class Post < ActiveRecord::Base
 
   validates_presence_of :content, :topic, :user_id
 
-  def attach_by_ids(attachment_ids)
-    attachments = Attachment.where(:id => attachment_ids)
+  def obtain_attachments(attachments)
     attachments.each do |attachment|
       attachment.attach(self)
     end

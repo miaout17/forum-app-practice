@@ -23,4 +23,9 @@ class ApplicationController < ActionController::Base
     @topic = @board.topics.find(params[:topic_id]?params[:topic_id]:params[:id])
   end
 
+  def find_new_attachments
+    attachment_ids = params[:attachment_ids].split(",").map { |i| i.to_i }
+    @new_attachments = Attachment.where( :id => attachment_ids )
+  end
+
 end
