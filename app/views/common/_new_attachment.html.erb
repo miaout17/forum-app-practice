@@ -1,0 +1,16 @@
+
+<div id="attachments">
+<%= link_to("New Attachment", new_attachment_path, :target => "_blank") %><br/>
+New Attachments Preview: 
+<div id="attachment-preview"></div>
+</div>
+<% if !@new_attachments.nil? and !@new_attachments.empty? %>
+  <script type="text/javascript">
+    $(function() {
+    <% @new_attachments.each do |a| %>
+      <%= "addAttachment(#{a.id}, '#{a.data.url}', '#{a.data.url(:thumb)}');"%>
+    <% end %>
+    });
+  </script>
+<% end %>
+
