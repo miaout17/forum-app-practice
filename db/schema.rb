@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101212053707) do
+ActiveRecord::Schema.define(:version => 20101214101550) do
 
   create_table "attachments", :force => true do |t|
     t.string   "data_file_name"
@@ -32,11 +32,21 @@ ActiveRecord::Schema.define(:version => 20101212053707) do
 
   add_index "boards", ["category_id"], :name => "index_boards_on_category_id"
 
+  create_table "boards_managers", :force => true do |t|
+    t.integer "board_id"
+    t.integer "manager_id"
+  end
+
   create_table "categories", :force => true do |t|
     t.string   "name"
     t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "categories_managers", :force => true do |t|
+    t.integer "category_id"
+    t.integer "manager_id"
   end
 
   create_table "posts", :force => true do |t|
@@ -63,9 +73,9 @@ ActiveRecord::Schema.define(:version => 20101212053707) do
   add_index "topics", ["user_id"], :name => "index_topics_on_user_id"
 
   create_table "users", :force => true do |t|
-    t.string   "email",                               :default => "", :null => false
-    t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
-    t.string   "password_salt",                       :default => "", :null => false
+    t.string   "email",                               :default => "",    :null => false
+    t.string   "encrypted_password",   :limit => 128, :default => "",    :null => false
+    t.string   "password_salt",                       :default => "",    :null => false
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"
@@ -86,6 +96,8 @@ ActiveRecord::Schema.define(:version => 20101212053707) do
     t.datetime "icon_updated_at"
     t.integer  "topics_count",                        :default => 0
     t.integer  "posts_count",                         :default => 0
+    t.boolean  "admin",                               :default => false
+    t.boolean  "banned",                              :default => false
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

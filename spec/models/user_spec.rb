@@ -98,6 +98,11 @@ describe User do
       User.find(user_id).should be
     end
 
+    pending "could get its managed boards"
+    pending "could get its managed categories"
+    pending "admin.."
+    pending "could be banned"
+
   end
 
 end

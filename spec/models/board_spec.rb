@@ -51,6 +51,9 @@ describe Board do
       @board.reload
       @board.topics.should include(topic)
     end
+
+    pending "should be able to get its managers" do
+    end
   end
 
 end

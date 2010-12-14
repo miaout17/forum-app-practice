@@ -39,6 +39,9 @@ describe Category do
       @category.boards.should include(board)
     end
 
+    pending "should be able to get its managers" do
+    end
+
     it "can get its descendant topics" do
       @root = @category
       
