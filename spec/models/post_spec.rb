@@ -66,19 +66,5 @@ describe Post do
       @post.user.should be
     end
 
-    it "could be edited by author" do
-      author = @post.user
-      @post.editable_by?(author).should be
-    end
-
-    it "couldn't be edited by author" do
-      other_user = Factory(:user)
-      @post.editable_by?(other_user).should_not be
-    end
-
-    it "couldn't be edited by nil user" do # case of not logged in
-      @post.editable_by?(nil).should_not be
-    end
-
   end
 end
