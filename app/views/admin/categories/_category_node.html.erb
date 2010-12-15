@@ -1,5 +1,5 @@
 <li>
-<%= category.name %>
+Category: <%= category.name %>
 <%= link_to("Edit", edit_admin_category_path(category)) %>
 <%= link_to("Delete", admin_category_path(category), :confirm => 'Are you sure?', :method => :delete) %></td>
 
@@ -9,7 +9,11 @@
     <%= render :partial => "category_node", :locals => { :category => subcategory } %>
   <% end %>
   <% category.boards.each do |board| %>
-    <li><%= link_to(board.name, admin_board_path(board)) %>
+    <li>
+      Board: <%= board.name %>
+      <%= link_to("Edit", edit_admin_board_path(board)) %>
+      <%= link_to("Delete", admin_board_path(board), :confirm => 'Are you sure?', :method => :delete) %></td>
+    </li>
   <% end %>
   </ul>
 <% end %>

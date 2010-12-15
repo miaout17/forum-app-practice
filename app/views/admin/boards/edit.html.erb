@@ -1,0 +1,5 @@
+<h2>Edit Board</h2>
+
+<%= form_for([:admin, @Board]) do |f| %>
+  <%= render :partial => "form", :locals => {:f => f} %>
+<% end %>

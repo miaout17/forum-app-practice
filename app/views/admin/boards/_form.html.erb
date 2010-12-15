@@ -1,0 +1,12 @@
+<%= render :partial => "common/error", :locals => { :errors => @board.errors } %>
+
+<p>
+<%= f.label(:name, "Name:") %> <br/>
+<%= text_field(:board, :name) %>
+</p>
+<p>
+<%= f.label(:parent, "Parent:") %> <br/>
+<%= f.select(:category_id, options_from_collection_for_select(Category.all, :id, :name)) %>
+</p>
+<%= f.submit %>
+
