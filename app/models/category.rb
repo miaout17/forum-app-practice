@@ -14,11 +14,13 @@ class Category < ActiveRecord::Base
   has_many :boards
 
   validates_presence_of :name
+  validate :validate_parent
 
   has_many :managements, :as => :manageable
   has_many :managers, 
     :through => :managements,
     :source => :user
+
 
   def descendant_topics
     # TODO: This is a very slow implementation now..
@@ -55,6 +57,15 @@ class Category < ActiveRecord::Base
     category_ids = descendant_categories.map { |c| c.id }
     boards = Board.where( :category_id => category_ids )
     return boards
+  end
+
+  def validate_parent
+    # return if parent_id.nil?
+
+    # valid_parent_ids = self.valid_parents.map { |c| c.id }
+    # if !valid_parent_ids.include?(parent_id)
+    #   errors.add(:base, "Circular parent association")
+    # end
   end
 
 end

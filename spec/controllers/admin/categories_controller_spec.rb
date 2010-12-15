@@ -66,5 +66,42 @@ describe Admin::CategoriesController do
     end
   end
 
+  describe "PUT update" do
+    before :each do
+      should_find_category
+      @params = { "title" => Faker::Lorem.sentence }
+    end
+
+    it "update successfully with valid params" do
+      @category.should_receive(:update_attributes).with(@params).and_return(true)
+      post :update, {
+        :id => 3, 
+        :category => @params, 
+      }
+      response.should redirect_to(admin_categories_url)
+    end
+
+    it "fails to update with invalid params" do
+      @category.should_receive(:update_attributes).with(@params).and_return(false)
+
+      put :update, {
+        :id => 3, 
+        :category => @params
+      }
+
+      assigns(:category).should eq(@category)
+      response.should render_template("edit")
+    end
+  end
+
+  describe "DELETE destroy" do
+    it "should redirect without admin premission" do
+      should_find_category
+      @category.should_receive(:destroy).and_return(true)
+      delete :destroy, :id => 3
+      response.should redirect_to(admin_categories_url)
+    end
+  end
+
 end
 

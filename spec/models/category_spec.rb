@@ -26,6 +26,26 @@ describe Category do
     it "should be invalid without name" do
       Category.new(@params.except(:name)).should_not be_valid
     end
+
+    it "should be valid with a parent" do
+      parent = Factory(:category)
+      category = Factory.build(:category, :parent => parent)
+      category.should be_valid
+    end
+
+    pending "should be invalid when setting self as parent" do
+      category = Factory(:category)
+      category = Factory.build(:category, :parent => category)
+      category.should_not be_valid
+    end
+
+    pending "should be invalid with circular parent association" do
+      parent = Factory(:category)
+      category = Factory(:category, :parent => parent)
+      parent.parent = category
+      parent.should_not be_valid
+    end
+
   end
 
   describe "instance" do
