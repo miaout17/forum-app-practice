@@ -85,5 +85,24 @@ describe Category do
       @root.descendant_topics.to_set.should == @all_topics.to_set
     end
 
+    it "could get its valid parent" do
+      @programming = @category
+      @ruby = Factory(:category, :parent => @programming)
+      @python = Factory(:category, :parent => @programming)
+
+      @game = Factory(:category)
+      @mmorpg = Factory(:category, :parent => @game)
+      @wow = Factory(:category, :parent => @mmorpg)
+      @lineage = Factory(:category, :parent => @mmorpg)
+
+      @pcgame = Factory(:category, :parent => @game)
+      @sango = Factory(:category, :parent => @pcgame)
+      @pal = Factory(:category, :parent => @pcgame)
+
+      got = @pcgame.valid_parents
+      expected = [@programming, @ruby, @python, @game, @mmorpg, @wow, @lineage]
+      
+      got.should =~ expected
+    end
   end
 end

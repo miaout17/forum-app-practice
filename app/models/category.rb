@@ -27,8 +27,21 @@ class Category < ActiveRecord::Base
     return Topic.where(:board_id => board_ids)
   end
 
+  def valid_parents
+    all_categories = Category.all
+    descendants = self.descendant_categories
+
+    invalid_ids = descendants.map { |c| c.id }
+
+    valid = all_categories.select do |c| 
+      !invalid_ids.include?(c.id) 
+    end 
+
+    return valid
+  end
+
   protected
-  
+
   # returns all descendant categories including self
   def descendant_categories
     categories = children.collect do |child|
