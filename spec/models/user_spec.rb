@@ -113,7 +113,22 @@ describe User do
       end
     end
 
-    pending "admin.."
+    it "is not admin when created" do
+      @user.admin?.should_not be
+    end
+
+    it "could be set as admin" do
+      @user.admin = true
+      @user.save
+      @user.reload
+      @user.admin?.should be
+    end
+
+    it "cannot update admin attribute by update_attributes" do
+      @user.update_attributes(:admin => true)
+      @user.admin?.should_not be
+    end
+
     pending "could be banned"
 
   end
