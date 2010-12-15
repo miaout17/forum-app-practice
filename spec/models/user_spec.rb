@@ -98,8 +98,21 @@ describe User do
       User.find(user_id).should be
     end
 
-    pending "could get its managed boards"
-    pending "could get its managed categories"
+    describe "with manager premission" do
+      before(:each) do
+        @board = Factory(:board)
+        @board.managers << @user
+        @category = Factory(:category)
+        @category.managers << @user
+      end
+      it "could get its manageable boards" do
+        @user.manageable_boards.should =~ [@board]
+      end
+      it "could get its manageable categories" do 
+        @user.manageable_categories.should =~ [@category]
+      end
+    end
+
     pending "admin.."
     pending "could be banned"
 

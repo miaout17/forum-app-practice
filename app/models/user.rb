@@ -49,6 +49,16 @@ class User < ActiveRecord::Base
   has_many :topics
   has_many :posts
 
+  has_many :managements
+  has_many :manageable_boards, 
+    :through => :managements,
+    :source => :manageable,
+    :source_type => 'Board'
+  has_many :manageable_categories, 
+    :through => :managements,
+    :source => :manageable,
+    :source_type => 'Category'
+
   validates_presence_of :name
   validates_uniqueness_of :name
 

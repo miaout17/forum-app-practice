@@ -15,6 +15,11 @@ class Category < ActiveRecord::Base
 
   validates_presence_of :name
 
+  has_many :managements, :as => :manageable
+  has_many :managers, 
+    :through => :managements,
+    :source => :user
+
   def descendant_topics
     # TODO: This is a very slow implementation now..
     # maybe the category hierarchy should be cached

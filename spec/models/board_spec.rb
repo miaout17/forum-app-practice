@@ -52,7 +52,12 @@ describe Board do
       @board.topics.should include(topic)
     end
 
-    pending "should be able to get its managers" do
+    it "should be able to get its managers" do
+      @manager = Factory(:user)
+      @board.managers << @manager
+
+      @board.reload
+      @board.managers.should include(@manager)
     end
   end
 

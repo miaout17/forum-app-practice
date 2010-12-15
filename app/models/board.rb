@@ -17,5 +17,10 @@ class Board < ActiveRecord::Base
   has_many :topics
   belongs_to :category
 
+  has_many :managements, :as => :manageable
+  has_many :managers, 
+    :through => :managements,
+    :source => :user
+
   validates_presence_of :name, :category_id
 end

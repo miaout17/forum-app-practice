@@ -32,11 +32,6 @@ ActiveRecord::Schema.define(:version => 20101214101550) do
 
   add_index "boards", ["category_id"], :name => "index_boards_on_category_id"
 
-  create_table "boards_managers", :force => true do |t|
-    t.integer "board_id"
-    t.integer "manager_id"
-  end
-
   create_table "categories", :force => true do |t|
     t.string   "name"
     t.integer  "parent_id"
@@ -44,9 +39,10 @@ ActiveRecord::Schema.define(:version => 20101214101550) do
     t.datetime "updated_at"
   end
 
-  create_table "categories_managers", :force => true do |t|
-    t.integer "category_id"
-    t.integer "manager_id"
+  create_table "managements", :force => true do |t|
+    t.integer "user_id"
+    t.integer "manageable_type"
+    t.integer "manageable_id"
   end
 
   create_table "posts", :force => true do |t|

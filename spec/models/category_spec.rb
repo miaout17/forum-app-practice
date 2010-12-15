@@ -39,7 +39,12 @@ describe Category do
       @category.boards.should include(board)
     end
 
-    pending "should be able to get its managers" do
+    it "should be able to get its managers" do
+      @manager = Factory(:user)
+      @category.managers << @manager
+
+      @category.reload
+      @category.managers.should include(@manager)
     end
 
     it "can get its descendant topics" do
