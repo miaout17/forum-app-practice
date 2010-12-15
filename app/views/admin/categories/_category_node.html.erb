@@ -1,0 +1,17 @@
+<li>
+<%= link_to(category.name, admin_category_path(category)) %>
+<%= link_to("Edit", edit_admin_category_path(category)) %>
+<%= link_to("Delete", admin_category_path(category), :confirm => 'Are you sure?', :method => :delete) %></td>
+
+<% unless category.children.empty? and category.boards.empty? %>
+  <ul>
+  <% category.children.each do |subcategory| %>
+    <%= render :partial => "category_node", :locals => { :category => subcategory } %>
+  <% end %>
+  <% category.boards.each do |board| %>
+    <li><%= link_to(board.name, admin_board_path(board)) %>
+  <% end %>
+  </ul>
+<% end %>
+</li>
+

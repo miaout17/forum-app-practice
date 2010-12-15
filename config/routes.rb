@@ -18,6 +18,17 @@ ForumApp::Application.routes.draw do
 
   root :to => "categories#index"
 
+  namespace :admin do
+    resources :categories, :except => [:show]
+
+    resources :boards do
+      resources :topics do
+        resources :posts
+      end
+    end
+
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
