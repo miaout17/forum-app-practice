@@ -124,12 +124,27 @@ describe User do
       @user.admin?.should be
     end
 
-    it "cannot update admin attribute by update_attributes" do
+    it "cannot modify admin attribute by update_attributes" do
       @user.update_attributes(:admin => true)
       @user.admin?.should_not be
     end
 
-    pending "could be banned"
+    it "could be banned" do
+      @user.banned?.should_not be
+      @user.ban
+      @user.reload
+      @user.banned?.should be
+    end
+
+    it "could be unbanned" do
+      @user.ban
+      @user.reload
+      @user.banned?.should be
+
+      @user.unban
+      @user.reload
+      @user.banned?.should_not be
+    end
 
   end
 

@@ -62,6 +62,15 @@ class User < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name
 
+  def ban
+    self.banned=true
+    save
+  end
+
+  def unban
+    self.banned=false
+    save
+  end
 
   # Hack: prevent devise to destroy user
   protected
