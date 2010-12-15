@@ -47,5 +47,14 @@ module ApplicationSpecHelperMethods
     controller.should_receive(:authenticate_user!)
     controller.stub!(:current_user).and_return(@current_user)
   end
+
+  def should_authorize_resource
+    controller.should_receive(:authorize!) 
+  end
+
+  private
+  def mock_resource
+
+  end
 end
 
