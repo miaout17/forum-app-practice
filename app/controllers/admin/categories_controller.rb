@@ -1,6 +1,8 @@
 class Admin::CategoriesController < Admin::BaseController
   authorize_resource
 
+  before_filter :find_category, :only => [:create, :edit, :destroy]
+
   def index
   end
 
@@ -15,6 +17,9 @@ class Admin::CategoriesController < Admin::BaseController
     else
       render :new
     end
+  end
+
+  def edit
   end
   
 end

@@ -15,6 +15,12 @@ class ApplicationController < ActionController::Base
     @root_categories = categories.select { |category| category.parent_id.nil? }
   end
 
+  def find_category
+    # TODO: children still queried from DB, need to optimize
+    category_id = (params[:category_id] ? params[:category_id] : params[:id]).to_i
+    @category = @all_categories[category_id]
+  end
+
   def find_board
     @board = Board.find(params[:board_id]?params[:board_id]:params[:id]) 
   end

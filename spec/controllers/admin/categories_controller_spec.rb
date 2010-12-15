@@ -3,6 +3,11 @@ require 'spec_helper'
 describe Admin::CategoriesController do
   include ApplicationSpecHelperMethods
 
+  def should_find_category
+    @category = mock_model(Category)
+    controller.should_receive(:find_category) { controller.instance_variable_set("@category", @category) }.ordered
+  end
+
   before(:each) do
     should_authenticate_user
     @current_user.stub!(:admin?).and_return(true) #TODO: manager
@@ -12,7 +17,6 @@ describe Admin::CategoriesController do
     it "shows category tree" do
       should_authorize_resource
       get :index
-
     end
   end
 
@@ -47,6 +51,18 @@ describe Admin::CategoriesController do
       post :create, :category => @params
       assigns(:category).should eq(@category)
       response.should render_template("new")
+    end
+  end
+
+  describe "GET edit" do
+    before(:each) do
+      should_find_category
+    end
+
+    it "returns requested category" do
+      get :edit, :id => 2
+      assigns(:category).should eq(@category)
+      response.should render_template("edit")
     end
   end
 
