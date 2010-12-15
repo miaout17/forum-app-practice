@@ -82,6 +82,13 @@ describe Admin::BoardsController do
     end
   end
 
-  pending "DELETE destroy"
+  describe "DELETE destroy" do
+    it "should redirect without admin premission" do
+      should_find_board
+      @board.should_receive(:destroy).and_return(true)
+      delete :destroy, :id => 3
+      response.should redirect_to(admin_categories_url)
+    end
+  end
 
 end

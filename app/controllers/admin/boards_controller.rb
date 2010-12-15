@@ -27,4 +27,9 @@ class Admin::BoardsController < Admin::BaseController
     end
   end
 
+  def destroy
+    @board.destroy
+    redirect_to(admin_categories_url)
+  end
+
 end
