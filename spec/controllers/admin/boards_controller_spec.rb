@@ -7,6 +7,11 @@ describe Admin::BoardsController do
     should_authenticate_user
     @current_user.stub!(:admin?).and_return(true) #TODO: manager
   end
+
+  def should_find_board
+    @board = mock_model(Board)
+    controller.should_receive(:find_board) { controller.instance_variable_set("@board", @board) }.ordered
+  end
   
   describe "GET new" do
     it "returs new board form" do
@@ -42,8 +47,41 @@ describe Admin::BoardsController do
     end
   end
 
-  pending "GET edit"
-  pending "PUT update"
+  describe "GET edit" do
+    it "returns requested board" do
+      should_find_board
+      get :edit, :id => 2
+    end
+  end
+
+  describe "PUT update" do
+    before(:each) do
+      should_find_board
+      @params = { "title" => Faker::Lorem.sentence }
+    end
+
+    it "update successfully with valid params" do
+      @board.should_receive(:update_attributes).with(@params).and_return(true)
+      put :update, {
+        :id => 3, 
+        :board => @params, 
+      }
+      response.should redirect_to(admin_categories_url)
+    end
+
+    it "fails to update with invalid params" do
+      @board.should_receive(:update_attributes).with(@params).and_return(false)
+
+      put :update, {
+        :id => 3, 
+        :board => @params
+      }
+
+      assigns(:board).should eq(@board)
+      response.should render_template("edit")
+    end
+  end
+
   pending "DELETE destroy"
 
 end

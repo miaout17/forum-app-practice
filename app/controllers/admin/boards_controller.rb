@@ -1,7 +1,8 @@
 class Admin::BoardsController < Admin::BaseController
   authorize_resource
 
-  # before_filter :find_board
+  before_filter :find_board, :only => [:edit, :update, :destroy]
+
   def new
     @board = Board.new
   end
@@ -12,6 +13,17 @@ class Admin::BoardsController < Admin::BaseController
       redirect_to(admin_categories_url)
     else
       render "new"
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @board.update_attributes(params[:board])
+      redirect_to(admin_categories_url)
+    else
+      render "edit"
     end
   end
 
