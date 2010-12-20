@@ -70,11 +70,13 @@ describe User do
 
   end
 
-  describe "instance" do
+  describe "normal user" do
 
     before(:each) do
       @user = Factory(:user)
-      @another_user = Factory(:user)
+      @ability = Ability.new(@user)
+      @other_user = Factory(:user)
+      @other_user_ability = Ability.new(@other_user)
     end
 
     it "could get its topics" do
@@ -86,7 +88,7 @@ describe User do
     it "could get its posts" do
       topic = Factory(:topic, :user => @user)
       post = Factory(:post, :user => @user, :topic => topic)
-      other_topic = Factory(:topic, :user => @another_user)
+      other_topic = Factory(:topic, :user => @other_user)
       reply = Factory(:post, :user => @user, :topic => other_topic)
       @user.reload
       @user.posts.should =~ [post, reply]
@@ -115,6 +117,10 @@ describe User do
 
     it "is not admin when created" do
       @user.admin?.should_not be
+    end
+
+    it "is not a manager when created" do
+      @user.manager?.should_not be
     end
 
     it "could be set as admin" do
@@ -146,6 +152,69 @@ describe User do
       @user.banned?.should_not be
     end
 
+    it "could edit his posts" do
+      topic = Factory(:topic, :user => @user)
+      post = Factory(:post, :topic => topic, :user => @user)
+      @ability.should be_able_to(:update, post)
+    end
+
+    it "could not be edited by users other than its author" do
+      topic = Factory(:topic, :user => @user)
+      post = Factory(:post, :topic => topic, :user => @user)
+      @other_user_ability.should_not be_able_to(:update, post)
+    end
+
+
+  end
+
+  describe "board manager" do
+    before(:each) do
+      @board = Factory(:board)
+      @topic = Factory(:topic, :board => @board)
+      @post = Factory(:post, :topic => @topic)
+
+      @other_board = Factory(:board)
+      @other_topic = Factory(:topic, :board => @other_board)
+      @other_post = Factory(:post, :topic => @other_topic)
+
+      @manager = Factory(:user)
+      @manager.manageable_boards << @board
+
+      @ability = AdminAbility.new(@manager)
+    end
+
+    it "is treat as a manager" do
+      @manager.manager?.should be
+    end
+
+    it "can manage contents under his manageable borads" do
+      @ability.should be_able_to(:manage_content, @board)
+      @ability.should be_able_to(:manage, @topic)
+      @ability.should be_able_to(:manage, @post)
+    end
+
+    it "cannot manage other boards" do
+      @ability.should_not be_able_to(:manage_content, @other_board)
+      @ability.should_not be_able_to(:manage, @other_topic)
+      @ability.should_not be_able_to(:manage, @other_post)
+    end
+
+  end
+
+  describe "category manager" do
+    pending
+  end
+
+  describe "admin" do
+    before(:each) do
+      @board = Factory(:board)
+      @admin = Factory(:user, :admin => true)
+    end
+    
+    it "is treat as a manager" do
+      @admin.manager?.should be
+    end
+    
   end
 
 end

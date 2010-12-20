@@ -62,6 +62,11 @@ class User < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name
 
+  def manager?
+    return true if self.admin?
+    return !self.managements.empty?
+  end
+
   def ban
     self.banned=true
     save

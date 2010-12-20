@@ -66,15 +66,5 @@ describe Post do
       @post.user.should be
     end
 
-    it "could be edited by its author" do
-      author = @post.user
-      author.should be_able_to(:update, @post)
-    end
-
-    it "could be edited by users other than its author" do
-      user = Factory(:user)
-      user.should_not be_able_to(:update, @post)
-    end
-
   end
 end

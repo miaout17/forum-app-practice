@@ -3,7 +3,7 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 
-require 'spec/custom_matcher'
+require 'cancan/matchers'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -28,7 +28,6 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
-  config.include(CustomMatchers)
 end
 
 module ApplicationSpecHelperMethods
