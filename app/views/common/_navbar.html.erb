@@ -1,11 +1,14 @@
 <div id="navbar">
 <% if user_signed_in? %>
   <%= user_link(current_user) %> | 
-  <%= link_to("Edit Profile", edit_user_registration_path) %> | 
-  <%= link_to("Sign out", destroy_user_session_path) %>
+  <%= link_to("Edit Profile", edit_user_registration_path) %> |
+  <%= link_to("Sign out", destroy_user_session_path) %> |
+  <% if current_user.admin? %>
+    <%= link_to("Admin", admin_categories_path) %> |
+  <% end %>
 <% else %>
   <%= link_to("Sign in", new_user_session_path) %> |
-  <%= link_to("Sign up", new_user_registration_path) %>
+  <%= link_to("Sign up", new_user_registration_path) %> |
 <% end %>
-| <a href="/">Home</a>
+<a href="/">Home</a>
 </div>
