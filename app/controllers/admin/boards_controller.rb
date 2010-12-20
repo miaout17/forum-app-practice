@@ -1,7 +1,7 @@
 class Admin::BoardsController < Admin::BaseController
-  authorize_resource
-
   before_filter :find_board, :only => [:edit, :update, :destroy]
+
+  authorize_resource
 
   def new
     @board = Board.new

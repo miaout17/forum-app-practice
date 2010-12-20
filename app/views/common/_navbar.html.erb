@@ -3,7 +3,7 @@
   <%= user_link(current_user) %> | 
   <%= link_to("Edit Profile", edit_user_registration_path) %> |
   <%= link_to("Sign out", destroy_user_session_path) %> |
-  <% if current_user.admin? %>
+  <% if current_user.manager? %>
     <%= link_to("Admin", admin_categories_path) %> |
   <% end %>
 <% else %>

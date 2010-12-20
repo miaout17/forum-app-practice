@@ -5,7 +5,7 @@ class Admin::BaseController < ApplicationController
   # Reference: https://github.com/ryanb/cancan/wiki/Admin-Namespace
   private
   def verify_permission!
-    redirect_to root_url unless current_user.admin?
+    redirect_to root_url unless current_user.manager?
   end
 
   def current_ability

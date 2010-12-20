@@ -5,7 +5,8 @@ describe Admin::BoardsController do
 
   before(:each) do
     should_authenticate_user
-    @current_user.stub!(:admin?).and_return(true) #TODO: manager
+    @current_user.stub!(:admin?).and_return(true) 
+    @current_user.stub!(:manager?).and_return(true) 
   end
 
   def should_find_board

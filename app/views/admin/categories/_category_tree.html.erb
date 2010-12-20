@@ -1,6 +1,6 @@
 Category Tree
 <ul class="category-tree">
 <% @root_categories.each do |root| %>
-  <%= render :partial => "category_node", :locals => { :category => root } %>
+  <%= render :partial => "admin/categories/category_node", :locals => { :category => root } %>
 <% end %>
 </ul>

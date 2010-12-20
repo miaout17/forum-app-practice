@@ -1,5 +1,5 @@
 class Admin::CategoriesController < Admin::BaseController
-  authorize_resource
+  authorize_resource :except => [:index]
 
   before_filter :find_category, :only => [:edit, :update, :destroy]
 

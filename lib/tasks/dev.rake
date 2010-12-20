@@ -68,6 +68,10 @@ namespace :dev do
       puts "Generated a authenticated user(email=#{user.email}, password=#{user.password})"
 
       admin = Factory(:user, :email => "admin@mail.com", :password => "123456", :name => "Admin Account", :admin => true)
+      
+      manager = Factory(:user, :email => "manager@mail.com", :password => "123456", :name => "Manager Account")
+      manager.manageable_boards << Board.first
+      manager.save
     end
   end
 

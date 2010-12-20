@@ -1,0 +1,20 @@
+<% content_for(:sidebar) do %>
+  <%=render :partial => "admin/categories/category_tree" %>
+<% end %>
+<h2>Board: <%= @board.name %></h2>
+
+<%= will_paginate @topics %>
+Topic Management: 
+<table class="topics-list">
+  <tr>
+    <th>Title</th>
+    <th>Replies</th>
+    <th>Author</th>
+  </tr>
+  <%= render :partial => "topic_row", 
+    :collection => @topics, 
+    :as => :topic
+  %>
+</table>
+<%= will_paginate @topics %>
+
