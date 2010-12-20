@@ -23,6 +23,7 @@ ForumApp::Application.routes.draw do
 
     resources :boards do
       resources :topics do
+        put :undelete, :on => :member
         resources :posts
       end
     end

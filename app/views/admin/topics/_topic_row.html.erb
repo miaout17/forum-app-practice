@@ -1,7 +1,13 @@
 <tr>
   <td>
     <%= link_to(topic.title, board_topic_path(topic.board, topic)) %><br/>
-    <%= link_to("Edit Title", edit_admin_board_topic_path(topic.board, topic)) %>
+    <%= link_to("Edit Title", edit_admin_board_topic_path(topic.board, topic)) %> <br/>
+    <% if topic.status=="deleted" %>
+      <%= link_to("Undelete Topic", undelete_admin_board_topic_path(topic.board, topic), :method => :put) %> | 
+      <span style="color:red;">This Topic is Deleted</span>
+    <% else %>
+      <%= link_to("Delete Topic", admin_board_topic_path(topic.board, topic), :method => :delete) %>
+    <% end %>
   </td>
   <td>
     <%= topic.posts_count - 1 %>

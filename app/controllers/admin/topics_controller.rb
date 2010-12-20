@@ -1,6 +1,6 @@
 class Admin::TopicsController < Admin::BaseController
   before_filter :find_board
-  before_filter :find_topic, :only => [:edit, :update, :destroy]
+  before_filter :find_topic, :only => [:edit, :update, :destroy, :undelete]
 
   authorize_resource
 
@@ -18,6 +18,16 @@ class Admin::TopicsController < Admin::BaseController
     else
       render("edit")
     end
+  end
+
+  def destroy
+    @topic.soft_delete
+    redirect_to(admin_board_topics_url(@board))
+  end
+
+  def undelete
+    @topic.soft_undelete
+    redirect_to(admin_board_topics_url(@board))
   end
 
 end

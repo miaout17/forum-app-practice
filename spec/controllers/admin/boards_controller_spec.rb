@@ -84,7 +84,7 @@ describe Admin::BoardsController do
   end
 
   describe "DELETE destroy" do
-    it "should redirect without admin premission" do
+    it "deletes the request board" do
       should_find_board
       @board.should_receive(:destroy).and_return(true)
       delete :destroy, :id => 3

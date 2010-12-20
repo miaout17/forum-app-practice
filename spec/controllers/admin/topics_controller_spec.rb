@@ -81,4 +81,25 @@ describe Admin::TopicsController do
 
   end
 
+  describe "DELETE destroy" do
+    it "soft_delete requested topic" do
+      should_find_board
+      should_find_topic
+      @topic.should_receive(:soft_delete).and_return(true)
+      delete :destroy, :board_id => 3, :id => 2
+      response.should redirect_to(admin_board_topics_url(@board))
+    end
+  end
+
+  describe "PUT undelete" do
+    it "soft_undelete requested topic" do
+      should_find_board
+      should_find_topic
+      @topic.should_receive(:soft_undelete).and_return(true)
+      put :undelete, :board_id => 3, :id => 2
+      response.should redirect_to(admin_board_topics_url(@board))
+    end
+  end
+
 end
+
