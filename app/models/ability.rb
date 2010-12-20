@@ -5,8 +5,8 @@ class Ability
 
     user ||= User.new # guest user
 
-    can :update, Post, :user_id => user.id, :status => "published" do |post|
-      post.topic.status=="published"
+    can :update, Post do |post|
+      post.user_id == user.id and post.status == "published" and post.topic.status=="published"
     end
 
     can :read, Topic, :status => "published"

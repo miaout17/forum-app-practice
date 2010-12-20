@@ -18,8 +18,10 @@ describe BoardsController do
 
   describe "GET show" do
     it "returns the board and its topics" do
+      controller.stub!(:current_user).and_return(nil)
       should_find_board
       @topics = []
+      @topics.should_receive(:accessible_by).and_return(@topics)
       @board.stub!(:topics).and_return(@topics)
       @topics.should_receive(:paginate).with(:per_page => 10, :page => 7).and_return(@topics)
 
