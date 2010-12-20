@@ -42,8 +42,6 @@ class Category < ActiveRecord::Base
     return valid
   end
 
-  protected
-
   # returns all descendant categories including self
   def descendant_categories
     categories = children.collect do |child|
@@ -58,6 +56,8 @@ class Category < ActiveRecord::Base
     boards = Board.where( :category_id => category_ids )
     return boards
   end
+
+  protected
 
   def validate_parent
     # return if parent_id.nil?

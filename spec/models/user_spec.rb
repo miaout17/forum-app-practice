@@ -202,7 +202,34 @@ describe User do
   end
 
   describe "category manager" do
-    pending
+    before(:each) do
+      @category = Factory(:category)
+      @board = Factory(:board, :category => @category)
+      @topic = Factory(:topic, :board => @board)
+      @post = Factory(:post, :topic => @topic)
+
+      @other_category = Factory(:category)
+      @other_board = Factory(:board, :category => @other_category)
+      @other_topic = Factory(:topic, :board => @other_board)
+      @other_post = Factory(:post, :topic => @other_topic)
+
+      @manager = Factory(:user)
+      @manager.manageable_categories << @category
+
+      @ability = AdminAbility.new(@manager)
+    end
+
+    it "can manage contents under his manageable borads" do
+      @ability.should be_able_to(:manage_content, @board)
+      @ability.should be_able_to(:manage, @topic)
+      @ability.should be_able_to(:manage, @post)
+    end
+
+    it "cannot manage other boards" do
+      @ability.should_not be_able_to(:manage_content, @other_board)
+      @ability.should_not be_able_to(:manage, @other_topic)
+      @ability.should_not be_able_to(:manage, @other_post)
+    end
   end
 
   describe "admin" do

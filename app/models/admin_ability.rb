@@ -9,6 +9,13 @@ class AdminAbility
 
     manageable_board_ids = user.manageable_boards.map { |b| b.id }
 
+    user.manageable_categories.map do |category| 
+      board_ids = category.descendant_boards.map { |b| b.id }
+      manageable_board_ids.concat(board_ids)
+    end
+
+    manageable_board_ids.uniq!
+
     unless manageable_board_ids.empty?
       can :manage_content, Board, :id => manageable_board_ids
     end
