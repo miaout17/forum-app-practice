@@ -1,6 +1,7 @@
 <tr>
   <td>
     <%= link_to(topic.title, board_topic_path(topic.board, topic)) %><br/>
+    <%= link_to("Edit Title", edit_admin_board_topic_path(topic.board, topic)) %>
   </td>
   <td>
     <%= topic.posts_count - 1 %>

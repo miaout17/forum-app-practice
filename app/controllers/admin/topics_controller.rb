@@ -9,4 +9,15 @@ class Admin::TopicsController < Admin::BaseController
     @topics = @board.topics.paginate(:per_page => 10, :page => params[:page])
   end
 
+  def edit
+  end
+
+  def update
+    if @topic.update_attributes(params[:topic])
+      redirect_to(admin_board_topic_url(@board, @topic))
+    else
+      render("edit")
+    end
+  end
+
 end

@@ -1,0 +1,11 @@
+<%= form_for([:admin, @board, @topic]) do |f| %>
+
+  <%= render :partial => "common/error", :locals => { :errors => @topic.errors } %>
+
+  <p>
+  <%= f.label(:title, "Title:") %>
+  <%= f.text_field(:title) %>
+  </p>
+
+  <%= f.submit %>
+<% end %>
