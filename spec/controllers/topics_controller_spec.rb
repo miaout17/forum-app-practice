@@ -36,6 +36,7 @@ describe TopicsController do
 
   def should_find_topic
     @topic = mock_model(Topic)
+    @topic.stub!(:status).and_return("published")
     controller.should_receive(:find_topic) { controller.instance_variable_set("@topic", @topic) }.ordered
   end
 
@@ -48,6 +49,7 @@ describe TopicsController do
 
   describe "GET show" do
     it "returns the topic ant its posts" do
+      controller.stub!(:current_user).and_return(nil)
       should_find_board
       should_find_topic
       @posts = []

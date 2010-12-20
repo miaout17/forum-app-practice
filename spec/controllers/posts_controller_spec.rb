@@ -66,6 +66,7 @@ describe PostsController do
 
   def should_find_post
     @post = mock_model(Post)
+    @post.stub!(:status).and_return("published")
     controller.should_receive(:find_post) { controller.instance_variable_set("@post", @post) }.ordered
   end
 

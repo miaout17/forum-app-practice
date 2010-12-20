@@ -25,6 +25,7 @@ class TopicsController < ApplicationController
   end
 
   def show
+    authorize!(:read, @topic)
     @posts = @topic.posts.paginate(:per_page => 10, :page => params[:page])
   end
 
