@@ -71,6 +71,34 @@ describe Topic do
       @topic.user.should be
     end
 
+    it "is published by default" do
+      @topic.status.should == "published"
+    end
+
+    it "could be deleted" do
+      @topic.soft_delete
+      @topic.reload
+      @topic.status.should == "deleted"
+    end
+
+    it "could be undeleted" do
+      @topic.soft_delete
+      @topic.soft_undelete
+      @topic.reload
+      @topic.status.should == "published"
+    end
+
+    describe ".published scope" do
+      it "should get published topics" do
+        Topic.published.all.should include(@topic)
+      end
+      it "shouldn't get deleted topics" do
+        @topic.soft_delete
+        Topic.published.all.should_not include(@topic)
+      end
+    end
+
+
     describe "#last_reply" do
 
       it "returns the last reply if exists" do

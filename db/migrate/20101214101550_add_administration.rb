@@ -9,6 +9,8 @@ class AddAdministration < ActiveRecord::Migration
       t.integer :manageable_id
     end
 
+    add_column :topics, :status, :string, :default => "published"
+    add_column :posts, :status, :string, :default => "published"
   end
 
   def self.down
@@ -16,5 +18,8 @@ class AddAdministration < ActiveRecord::Migration
     remove_column :users, :banned
 
     drop_table :managements
+
+    remove_column :topics, :status
+    remove_column :posts, :status
   end
 end

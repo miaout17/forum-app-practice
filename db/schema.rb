@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20101214101550) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.string   "status",     :default => "published"
   end
 
   add_index "posts", ["topic_id"], :name => "index_posts_on_topic_id"
@@ -63,6 +64,7 @@ ActiveRecord::Schema.define(:version => 20101214101550) do
     t.datetime "updated_at"
     t.integer  "posts_count", :default => 0
     t.integer  "user_id"
+    t.string   "status",      :default => "published"
   end
 
   add_index "topics", ["board_id"], :name => "index_topics_on_board_id"

@@ -20,6 +20,7 @@ class Topic < ActiveRecord::Base
   has_many :posts, :inverse_of => :topic
 
   default_scope :order => 'id DESC'
+  scope :published, where(:status => "published")
 
   validates_presence_of :title, :board_id, :user_id
 
@@ -39,6 +40,16 @@ class Topic < ActiveRecord::Base
     end
     # return posts.last(count).reverse
     return Post.where(:topic_id => id).limit(count).order('id DESC')
+  end
+
+  def soft_delete
+    self.status = "deleted"
+    return save
+  end
+
+  def soft_undelete
+    self.status = "published"
+    return save
   end
 
 end
